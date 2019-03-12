@@ -2,6 +2,7 @@ extends Node
 
 onready var player = $Common/Elizabeth
 onready var gui = $Common/GUI
+onready var randenc = $Common/RandomEncounters
 
 const FADE = preload("res://UI/FadeTransition.tscn")
 const BATTLE = preload("res://UI/BattleTransition.tscn")
@@ -14,6 +15,18 @@ func _ready():
 		current_room = room
 		room.init(player)
 		room.connect("change_room", self, "_change_room")
+	player.connect("encounter", self, "encounter")
+
+func encounter():
+	if player == null or randenc == null:
+		return
+	if randenc.on and not get_tree().current_scene.has_node("/BattleTransition"):
+		player.state = "wait_state"
+	var fade = BATTLE.instance()
+	get_tree().current_scene.add_child(fade)
+	fade.fade(1)
+	yield(fade, "fade_done")
+	get_tree().change_scene("res://MainScenes/Battle.tscn")
 
 func _change_room(target_room):
 	call_deferred("_change_room_deferred", target_room)

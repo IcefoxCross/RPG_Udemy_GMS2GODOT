@@ -2,15 +2,20 @@ extends KinematicBody2D
 
 export (float) var move_speed = 100.0
 
+const LASTE = preload("res://MainScenes/LastEncounter.tscn")
+
+signal encounter
+
 onready var anim = $AnimationPlayer
 onready var camera = $Camera2D
 
 var motion = Vector2()
 var spritedir = "down"
 var state = "move_state"
+var last_encounter
 
 func _ready():
-	pass
+	last_encounter = null
 
 func start(pos):
 	set_physics_process(true)
@@ -19,6 +24,7 @@ func start(pos):
 	position = pos
 	yield(get_tree().create_timer(0.1),"timeout")
 	camera.smoothing_enabled = true
+	last_encounter = null
 
 func stop():
 	set_physics_process(false)
@@ -59,3 +65,15 @@ func move_state():
 	get_input()
 	spritedir_loop()
 	motion = move_and_slide(motion.normalized() * move_speed)
+	
+	if last_encounter == null:
+		last_encounter = LASTE.instance()
+		add_child(last_encounter)
+		last_encounter.position = position
+		last_encounter.distance = rand_range(32, (camera.limit_right - camera.limit_left)/2)
+	else:
+		if position.distance_to(last_encounter.position) >= last_encounter.distance:
+			emit_signal("encounter")
+
+func wait_state():
+	stop()

@@ -5,7 +5,7 @@
 
 [node name="BattleTransition" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-duration = 1.0
+duration = 0.5
 
 [node name="ColorRect" parent="Control" index="0"]
 color = Color( 0.992157, 0.415686, 0.00784314, 1 )
