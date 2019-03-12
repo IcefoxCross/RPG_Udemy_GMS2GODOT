@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MainScenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://Rooms/Town.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Elizabeth.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/Assets/b_vignette.png" type="Texture" id=4]
+[ext_resource path="res://MainScenes/RandomEncounters.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -19,6 +20,7 @@ position = Vector2( 48, 110 )
 move_speed = 75.0
 
 [node name="GUI" type="CanvasLayer" parent="Common"]
+editor/display_folded = true
 
 [node name="Control" type="Control" parent="Common/GUI"]
 editor/display_folded = true
@@ -38,4 +40,6 @@ expand = true
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="RandomEncounters" parent="Common" instance=ExtResource( 5 )]
 
