@@ -4,6 +4,7 @@ onready var player = $Common/Elizabeth
 onready var gui = $Common/GUI
 
 const FADE = preload("res://UI/FadeTransition.tscn")
+const BATTLE = preload("res://UI/BattleTransition.tscn")
 
 var current_room
 

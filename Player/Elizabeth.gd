@@ -35,10 +35,6 @@ func _physics_process(delta):
 		anim_switch("idle")
 	#motion = move_and_slide(motion.normalized() * move_speed)
 
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_accept"):
-		camera.shake = true
-
 func get_input():
 	motion.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	motion.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
