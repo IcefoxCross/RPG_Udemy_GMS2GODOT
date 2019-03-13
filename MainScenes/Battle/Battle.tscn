@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://MainScenes/Battle.gd" type="Script" id=1]
+[ext_resource path="res://MainScenes/Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://UI/Assets/Battle/b_sky.png" type="Texture" id=2]
 [ext_resource path="res://UI/Assets/Battle/b_mountains.png" type="Texture" id=3]
 [ext_resource path="res://UI/Assets/Battle/b_trees_background.png" type="Texture" id=4]
@@ -9,6 +9,8 @@
 [ext_resource path="res://UI/Assets/Battle/b_grass_front.png" type="Texture" id=7]
 [ext_resource path="res://UI/Assets/Battle/b_grass_foreground.png" type="Texture" id=8]
 [ext_resource path="res://UI/Assets/Battle/b_trees_foreground.png" type="Texture" id=9]
+[ext_resource path="res://MainScenes/GameCamera.tscn" type="PackedScene" id=10]
+[ext_resource path="res://MainScenes/BattleCamera.gd" type="Script" id=11]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -75,7 +77,7 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 320, 180 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 272, 90 )
-current = true
+[node name="BattleCamera" parent="." instance=ExtResource( 10 )]
+position = Vector2( 256, 90 )
+script = ExtResource( 11 )
 

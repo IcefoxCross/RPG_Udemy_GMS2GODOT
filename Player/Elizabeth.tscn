@@ -5,7 +5,7 @@
 [ext_resource path="res://Player/Sprites/s_elizabeth_down_strip4.png" type="Texture" id=3]
 [ext_resource path="res://Player/Sprites/s_elizabeth_left_strip4.png" type="Texture" id=4]
 [ext_resource path="res://Player/Sprites/s_elizabeth_up_strip4.png" type="Texture" id=5]
-[ext_resource path="res://Player/Camera2D.gd" type="Script" id=6]
+[ext_resource path="res://MainScenes/GameCamera.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 5 )
@@ -258,11 +258,5 @@ anims/walkleft = SubResource( 7 )
 anims/walkright = SubResource( 8 )
 anims/walkup = SubResource( 9 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-smoothing_enabled = true
-script = ExtResource( 6 )
+[node name="Camera2D" parent="." instance=ExtResource( 6 )]
 
-[node name="Timer" type="Timer" parent="Camera2D"]
-
-[connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_Timer_timeout"]

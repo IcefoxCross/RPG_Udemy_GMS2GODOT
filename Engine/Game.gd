@@ -1,4 +1,4 @@
 extends Node
 
-func _ready():
-	pass
+var room_height
+var room_width

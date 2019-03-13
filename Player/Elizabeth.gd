@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export (float) var move_speed = 100.0
 
-const LASTE = preload("res://MainScenes/LastEncounter.tscn")
+const LASTE = preload("res://MainScenes/Battle/LastEncounter.tscn")
 
 signal encounter
 
@@ -33,14 +33,11 @@ func stop():
 func _physics_process(delta):
 	z_index = max(0,position.y)
 	motion = Vector2()
-	#get_input()
-	#spritedir_loop()
 	call(state)
 	if motion != gdata.direction["center"]:
 		anim_switch("walk")
 	else:
 		anim_switch("idle")
-	#motion = move_and_slide(motion.normalized() * move_speed)
 
 func get_input():
 	motion.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
