@@ -6,7 +6,6 @@
 [ext_resource path="res://UI/Assets/b_vignette.png" type="Texture" id=4]
 [ext_resource path="res://MainScenes/Battle/RandomEncounters.tscn" type="PackedScene" id=5]
 
-
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 

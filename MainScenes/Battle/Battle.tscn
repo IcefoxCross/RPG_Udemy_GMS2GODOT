@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://MainScenes/Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://MainScenes/Battle/Background.gd" type="Script" id=2]
@@ -14,6 +14,19 @@
 [ext_resource path="res://MainScenes/Battle/BattleCamera.gd" type="Script" id=12]
 [ext_resource path="res://MainScenes/Battle/Units/PlayerUnit.tscn" type="PackedScene" id=13]
 [ext_resource path="res://MainScenes/Battle/Units/EnemyUnit.tscn" type="PackedScene" id=14]
+[ext_resource path="res://icon.png" type="Texture" id=15]
+
+[sub_resource type="TileSet" id=1]
+0/name = "icon.png 0"
+0/texture = ExtResource( 15 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 0, 0, 0, 1 )
+0/region = Rect2( 16, 16, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [  ]
+0/z_index = 0
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -85,12 +98,21 @@ smoothing_enabled = false
 script = ExtResource( 12 )
 
 [node name="Units" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="PlayerUnit" parent="Units" instance=ExtResource( 13 )]
 position = Vector2( 544, 224 )
 
 [node name="EnemyUnit" parent="Units" instance=ExtResource( 14 )]
 position = Vector2( 736, 226 )
+
+[node name="IdleView" type="TileMap" parent="."]
+visible = false
+z_index = 10
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 262173, 0, 0, 262174, 0, 0, 262175, 0, 0, 262176, 0, 0, 262177, 0, 0, 262178, 0, 0, 262179, 0, 0, 262180, 0, 0, 262181, 0, 0, 262182, 0, 0, 262183, 0, 0, 262184, 0, 0, 262185, 0, 0, 262186, 0, 0, 262187, 0, 0, 262188, 0, 0, 262189, 0, 0, 262190, 0, 0, 262191, 0, 0, 262192, 0, 0, 262193, 0, 0, 262194, 0, 0, 327709, 0, 0, 327730, 0, 0, 393245, 0, 0, 393266, 0, 0, 458781, 0, 0, 458802, 0, 0, 524317, 0, 0, 524338, 0, 0, 589853, 0, 0, 589874, 0, 0, 655389, 0, 0, 655410, 0, 0, 720925, 0, 0, 720946, 0, 0, 786461, 0, 0, 786482, 0, 0, 851997, 0, 0, 852018, 0, 0, 917533, 0, 0, 917537, 0, 0, 917538, 0, 0, 917549, 0, 0, 917550, 0, 0, 917554, 0, 0, 983069, 0, 0, 983090, 0, 0, 1048605, 0, 0, 1048626, 0, 0, 1114141, 0, 0, 1114142, 0, 0, 1114143, 0, 0, 1114144, 0, 0, 1114145, 0, 0, 1114146, 0, 0, 1114147, 0, 0, 1114148, 0, 0, 1114149, 0, 0, 1114150, 0, 0, 1114151, 0, 0, 1114152, 0, 0, 1114153, 0, 0, 1114154, 0, 0, 1114155, 0, 0, 1114156, 0, 0, 1114157, 0, 0, 1114158, 0, 0, 1114159, 0, 0, 1114160, 0, 0, 1114161, 0, 0, 1114162, 0, 0 )
 
 
 [editable path="BattleCamera"]
