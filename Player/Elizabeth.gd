@@ -31,6 +31,7 @@ func stop():
 	set_process_input(false)
 
 func _physics_process(delta):
+	z_index = max(0,position.y)
 	motion = Vector2()
 	#get_input()
 	#spritedir_loop()
