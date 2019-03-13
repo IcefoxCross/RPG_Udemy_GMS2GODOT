@@ -26,7 +26,7 @@ func encounter():
 		get_tree().current_scene.add_child(fade)
 		fade.fade(1)
 		yield(fade, "fade_done")
-		get_tree().change_scene("res://MainScenes/Battle.tscn")
+		get_tree().change_scene("res://MainScenes/Battle/Battle.tscn")
 
 func _change_room(target_room):
 	call_deferred("_change_room_deferred", target_room)

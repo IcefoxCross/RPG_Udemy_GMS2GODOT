@@ -20,7 +20,7 @@ func _process(delta):
 
 func set_duration(value):
 	duration = value
-	timer.wait_time = duration
+	$Timer.wait_time = duration
 
 func set_shake(value):
 	shake = value
