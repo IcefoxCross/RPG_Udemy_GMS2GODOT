@@ -22,7 +22,7 @@ func get_class_data():
 			"experience": 0,
 			"actions": []
 		},
-		"monster": {
+		"spider": {
 			"name": "Spider",
 			"health": 3,
 			"attack": 5,

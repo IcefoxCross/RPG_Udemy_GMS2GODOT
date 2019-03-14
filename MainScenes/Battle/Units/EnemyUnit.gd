@@ -1,9 +1,8 @@
 extends "res://MainScenes/Battle/Units/BattleUnit.gd"
 
-onready var anim = $AnimationPlayer
-onready var sprite = $Sprite
+export (String) var unit_name
 
 func _ready():
 	._ready()
-	anim.playback_speed = 1
-	sprite.flip_h = true
+	
+	start(unit_name, 1, true, .7, .6, .8, .6)

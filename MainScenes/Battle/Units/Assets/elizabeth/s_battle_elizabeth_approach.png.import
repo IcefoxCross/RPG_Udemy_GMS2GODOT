@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/s_battle_elizabeth_idle_strip4.png-e8e6cbd6dc0a7d7b2df1ad41c2487f5c.stex"
+path="res://.import/s_battle_elizabeth_approach.png-14eab592629da5e7f30cfe88f6a30854.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MainScenes/Battle/Units/Assets/s_battle_elizabeth_idle_strip4.png"
-dest_files=[ "res://.import/s_battle_elizabeth_idle_strip4.png-e8e6cbd6dc0a7d7b2df1ad41c2487f5c.stex" ]
+source_file="res://MainScenes/Battle/Units/Assets/elizabeth/s_battle_elizabeth_approach.png"
+dest_files=[ "res://.import/s_battle_elizabeth_approach.png-14eab592629da5e7f30cfe88f6a30854.stex" ]
 
 [params]
 
