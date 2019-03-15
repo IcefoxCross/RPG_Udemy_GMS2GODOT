@@ -8,12 +8,14 @@ onready var tween = $Control/Tween
 signal fade_done
 
 func _ready():
-	if get_tree().current_scene.name == "Battle":
-		rect.modulate.a = 1
-	else:
-		rect.modulate.a = 0
+#	if get_tree().current_scene.name == "Battle":
+#		rect.modulate.a = 1
+#	else:
+	rect.modulate.a = 0
 
 func fade(alpha):
+	if alpha == 0:
+		rect.modulate.a = 1
 	var target_color = rect.modulate
 	target_color.a = alpha
 	tween.interpolate_property(rect, "modulate", rect.modulate, target_color,duration,Tween.TRANS_SINE,Tween.EASE_OUT)

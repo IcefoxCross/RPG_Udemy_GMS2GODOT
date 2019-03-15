@@ -22,7 +22,6 @@ func _ready():
 	x_start.append(sprites[7].position.x)
 	
 	sprites[7].position.x = 300
-	print(view_size.x)
 
 func _process(delta):
 	x_scale = view_size.x / (Game.room_width/2)

@@ -16,15 +16,20 @@ var last_encounter
 
 func _ready():
 	last_encounter = null
+	set_physics_process(false)
+	set_process_input(false)
 
-func start(pos):
+func start(pos, dir = "down"):
+	if last_encounter != null:
+		last_encounter.queue_free()
+		last_encounter = null
 	set_physics_process(true)
 	set_process_input(true)
 	camera.smoothing_enabled = false
 	position = pos
+	spritedir = dir
 	yield(get_tree().create_timer(0.1),"timeout")
 	camera.smoothing_enabled = true
-	last_encounter = null
 
 func stop():
 	set_physics_process(false)

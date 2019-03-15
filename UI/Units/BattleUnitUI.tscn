@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/Units/BattleUnitUI.gd" type="Script" id=1]
+[ext_resource path="res://UI/Assets/Units/s_info_bar_0.png" type="Texture" id=2]
+
+[node name="BattleUnitUI" type="Control"]
+script = ExtResource( 1 )
+
+[node name="InfoBar" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+

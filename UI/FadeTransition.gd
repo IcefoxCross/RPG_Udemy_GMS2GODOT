@@ -11,6 +11,9 @@ func _ready():
 	rect.modulate.a = 0
 
 func fade(alpha):
+	if alpha == 0:
+		rect.modulate.a = 1
+		duration = 1.0
 	var target_color = rect.modulate
 	target_color.a = alpha
 	tween.interpolate_property(rect, "modulate", rect.modulate, target_color,duration,Tween.TRANS_SINE,Tween.EASE_OUT)

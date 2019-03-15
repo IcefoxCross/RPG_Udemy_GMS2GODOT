@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://MainScenes/Battle/Units/BattleUnit.gd" type="Script" id=1]
+[ext_resource path="res://UI/Units/BattleUnitUI.tscn" type="PackedScene" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "approach"
@@ -185,4 +186,6 @@ anims/hit = SubResource( 3 )
 anims/idle = SubResource( 4 )
 anims/ranged = SubResource( 5 )
 anims/return = SubResource( 6 )
+
+[node name="BattleUnitUI" parent="." instance=ExtResource( 2 )]
 

@@ -1,7 +1,12 @@
 extends Node2D
 
+export (Vector2) var sprite_offset = Vector2(0,0)
+
 onready var sprite = $Sprite
 onready var anim = $AnimationPlayer
+onready var ui = $BattleUnitUI
+
+signal battle_won
 
 var level
 var _class
@@ -53,5 +58,16 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	
 	anim.playback_speed = anim_speed["idle"]
 	sprite.texture = sprites["idle"]
+	set_pivot("bottom_center")
 	anim.current_animation = "idle"
 	anim.play("idle")
+
+func destroy():
+	if is_in_group("enemy"):
+		queue_free()
+		emit_signal("battle_won")
+
+func set_pivot(pivot):
+	match pivot:
+		"bottom_center":
+			sprite.position = Vector2(0 + sprite_offset.x, 0 - (sprite.texture.get_height()/2) + sprite_offset.y)

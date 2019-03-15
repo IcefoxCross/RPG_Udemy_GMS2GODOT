@@ -1,6 +1,6 @@
 extends Node
 
-var on
+export (bool) var on = true
 
 func _ready():
-	on = true
+	pass

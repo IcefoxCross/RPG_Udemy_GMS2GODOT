@@ -10,22 +10,32 @@ const BATTLE = preload("res://UI/BattleTransition.tscn")
 var current_room
 
 func _ready():
-	var room = $Room.get_children()[0]
-	if room != null:
-		current_room = room
-		room.init(player)
-		room.connect("change_room", self, "_change_room")
+	var new_room = load(gdata.last_room["room"]).instance()
+	$Room.add_child(new_room)
+	new_room.init(player)
+	current_room = new_room
+	player.start(Vector2(gdata.last_room["x"],gdata.last_room["y"]),gdata.last_room["dir"])
+	current_room.connect("change_room", self, "_change_room")
 	player.connect("encounter", self, "encounter")
+	var fade = FADE.instance()
+	get_tree().current_scene.add_child(fade)
+	fade.fade(0)
+	yield(fade, "fade_done")
 
 func encounter():
 	if player == null or randenc == null:
 		return
 	if randenc.on and not get_tree().current_scene.has_node("/BattleTransition"):
 		player.state = "wait_state"
+		gdata.last_room["room"] = current_room.filename
+		gdata.last_room["x"] = player.position.x
+		gdata.last_room["y"] = player.position.y
+		gdata.last_room["dir"] = player.spritedir
 		var fade = BATTLE.instance()
 		get_tree().current_scene.add_child(fade)
 		fade.fade(1)
 		yield(fade, "fade_done")
+		#gdata.switch_scene("res://MainScenes/Battle/Battle.tscn")
 		get_tree().change_scene("res://MainScenes/Battle/Battle.tscn")
 
 func _change_room(target_room):
