@@ -271,6 +271,7 @@ script = ExtResource( 12 )
 [node name="Units" type="Node" parent="."]
 
 [node name="EnemyUnit" parent="Units" instance=ExtResource( 13 )]
+editor/display_folded = true
 position = Vector2( 736, 224 )
 sprite_offset = Vector2( 0, 4 )
 unit_name = "spider"

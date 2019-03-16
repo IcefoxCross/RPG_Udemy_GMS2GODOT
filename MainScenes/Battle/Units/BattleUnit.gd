@@ -71,7 +71,7 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	anim.playback_speed = anim_speed["idle"]
 	sprite.texture = sprites["idle"]
 	set_pivot("bottom_center")
-	anim.current_animation = "idle"
+	#anim.current_animation = "idle"
 	anim.play("idle")
 	set_physics_process(true)
 
@@ -97,6 +97,12 @@ func destroy():
 	if is_in_group("enemy"):
 		queue_free()
 		emit_signal("battle_won")
+
+func change_anim(sprite):
+	if sprite.texture != sprites[sprite]:
+		sprite.texture = sprites[sprite]
+		anim.playback_speed = anim_speed[sprite]
+		anim.play(sprite)
 
 func _physics_process(delta):
 	var dis = draw_health - stats_object.stats["health"]

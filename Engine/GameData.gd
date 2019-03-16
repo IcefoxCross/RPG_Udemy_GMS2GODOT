@@ -23,6 +23,13 @@ func chance(perc):
 	randomize()
 	return 1 if (perc > randf()) else 0
 
+func get_frames(x1, x2, speed):
+	var dis = abs(x1-x2)
+	return round(dis/speed)
+
+func get_image_speed_from_frames(frames, image_number):
+	return (1/(frames/image_number))
+
 #### ROOM PERSISTENCE ####
 var room_scene = null
 var last_room = {
