@@ -6,7 +6,7 @@ const FADE = preload("res://UI/FadeTransition.tscn")
 onready var camera = $BattleCamera
 onready var enemy = $Units/EnemyUnit
 
-var play
+var play = true
 
 func _ready():
 	play = true

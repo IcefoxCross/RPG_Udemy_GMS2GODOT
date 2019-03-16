@@ -7,13 +7,13 @@ var target = Vector2()
 func _ready():
 	timer = $Timer
 	._ready()
-	set_process(true)
 
 func start():
 	speed = .1
 	position.x = 256
 	position.y = Game.room_height / 2
 	state = "intro_state"
+	set_process(true)
 
 func _process(delta):
 	._process(delta)

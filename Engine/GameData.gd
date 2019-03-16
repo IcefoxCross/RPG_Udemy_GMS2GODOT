@@ -1,5 +1,9 @@
 extends Node
 
+### CONSTS ###
+const BATTLE_SPACE = 160
+
+### VARS ###
 var direction = {
 	"center": Vector2(0,0),
 	"left": Vector2(-1,0),
@@ -8,6 +12,16 @@ var direction = {
 	"down": Vector2(0,1)
 }
 
+### FUNCS ###
+func approach(start, end, shift):
+	if (start < end):
+		return min(start + shift, end)
+	else:
+		return max(start - shift, end)
+
+func chance(perc):
+	randomize()
+	return 1 if (perc > randf()) else 0
 
 #### ROOM PERSISTENCE ####
 var room_scene = null

@@ -9,7 +9,7 @@ var stats
 var draw_health
 
 func _ready():
-	level = 1
+	level = 3
 	_class = gdata.classes["elizabeth"]
 	
 	items = {}

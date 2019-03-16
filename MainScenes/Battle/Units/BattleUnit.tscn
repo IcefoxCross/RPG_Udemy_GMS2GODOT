@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://MainScenes/Battle/Units/BattleUnit.gd" type="Script" id=1]
 [ext_resource path="res://UI/Units/BattleUnitUI.tscn" type="PackedScene" id=2]
@@ -172,7 +172,12 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[node name="BattleUnit" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 16 )
+
+[node name="BattleUnit" type="Node2D" groups=[
+"unit",
+]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -188,4 +193,17 @@ anims/ranged = SubResource( 5 )
 anims/return = SubResource( 6 )
 
 [node name="BattleUnitUI" parent="." instance=ExtResource( 2 )]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 16, -16 )
+enabled = true
+cast_to = Vector2( 16, 0 )
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -16 )
+shape = SubResource( 7 )
 
