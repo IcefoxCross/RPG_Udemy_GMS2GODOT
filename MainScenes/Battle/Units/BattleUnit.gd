@@ -8,14 +8,14 @@ onready var ui = $BattleUnitUI
 
 signal battle_won
 
-var level
+var level setget set_level
 var _class
 var items
 var actions
 var stats
-var draw_health
+var draw_health setget set_draw_health
 
-var action_meter
+var action_meter setget set_action_meter
 var max_action_meter
 var item_index
 var state
@@ -25,13 +25,12 @@ var anim_speed = {}
 var sprites = {}
 
 func _ready():
-	action_meter = 0
 	max_action_meter = 100
+	self.action_meter = 0
 	item_index = 0
 	state = null
 
 func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_speed):
-	level = _level
 	# Stats object
 	stats_object = self
 	if not is_enemy:
@@ -39,7 +38,8 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	# Enemy stats
 	if is_enemy:
 		stats = Stats.get_stats_from_class(_name)
-		draw_health = stats["health"]
+	self.level = _level
+	self.draw_health = stats_object.stats["health"]
 	sprite.flip_h = is_enemy
 	
 	sprites["idle"] = load(str("res://MainScenes/Battle/Units/Assets/",_name,"/s_battle_",_name,"_idle.png"))
@@ -71,3 +71,15 @@ func set_pivot(pivot):
 	match pivot:
 		"bottom_center":
 			sprite.position = Vector2(0 + sprite_offset.x, 0 - (sprite.texture.get_height()/2) + sprite_offset.y)
+
+func set_level(value):
+	level = value
+	ui.draw_level()
+
+func set_draw_health(value):
+	draw_health = value
+	ui.draw_health()
+
+func set_action_meter(value):
+	action_meter = value
+	ui.draw_action()

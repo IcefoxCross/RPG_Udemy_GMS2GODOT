@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI/Units/BattleUnitUI.gd" type="Script" id=1]
 [ext_resource path="res://UI/Assets/Units/s_info_bar_0.png" type="Texture" id=2]
+[ext_resource path="res://UI/Assets/Units/s_action_meter_strip62.png" type="Texture" id=3]
+[ext_resource path="res://UI/Assets/Units/s_health_bar_strip62.png" type="Texture" id=4]
+[ext_resource path="res://UI/Assets/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+font_data = ExtResource( 5 )
 
 [node name="BattleUnitUI" type="Control"]
 script = ExtResource( 1 )
@@ -10,4 +17,33 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
+
+[node name="ActionMeter" type="Sprite" parent="InfoBar"]
+position = Vector2( 34, 9 )
+texture = ExtResource( 3 )
+hframes = 62
+frame = 31
+
+[node name="HealthBar" type="Sprite" parent="InfoBar"]
+position = Vector2( 34, 5.5 )
+texture = ExtResource( 4 )
+hframes = 62
+frame = 31
+
+[node name="LevelL" type="Label" parent="InfoBar"]
+margin_left = 2.0
+margin_top = 15.0
+margin_right = 55.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+text = "Level"
+
+[node name="LevelR" type="Label" parent="InfoBar"]
+margin_left = 2.0
+margin_top = 15.0
+margin_right = 55.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+text = "10"
+align = 2
 

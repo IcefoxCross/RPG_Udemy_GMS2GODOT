@@ -268,6 +268,7 @@ script = ExtResource( 12 )
 [node name="Units" type="Node" parent="."]
 
 [node name="EnemyUnit" parent="Units" instance=ExtResource( 13 )]
+editor/display_folded = true
 position = Vector2( 736, 224 )
 sprite_offset = Vector2( 0, 4 )
 unit_name = "spider"
@@ -288,6 +289,7 @@ anims/return = SubResource( 7 )
 position = Vector2( 544, 224 )
 
 [node name="IdleView" type="TileMap" parent="."]
+visible = false
 z_index = 10
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
