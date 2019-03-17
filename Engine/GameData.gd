@@ -28,7 +28,7 @@ func get_frames(x1, x2, speed):
 	return round(dis/speed)
 
 func get_image_speed_from_frames(frames, image_number):
-	return (1/(frames/image_number))
+	return (9/(frames/image_number))
 
 #### ROOM PERSISTENCE ####
 var room_scene = null

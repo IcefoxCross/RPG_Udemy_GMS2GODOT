@@ -29,6 +29,7 @@ var sprites = {}
 
 var battle
 var start_pos
+var attacked
 
 func _ready():
 	max_action_meter = 100
@@ -68,11 +69,11 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	anim_speed["hit"] = hit_speed
 	anim_speed["ranged"] = range_speed
 	
-	anim.playback_speed = anim_speed["idle"]
-	sprite.texture = sprites["idle"]
-	set_pivot("bottom_center")
-	#anim.current_animation = "idle"
-	anim.play("idle")
+#	anim.playback_speed = anim_speed["idle"]
+#	sprite.texture = sprites["idle"]
+	change_anim("idle")
+#	#anim.current_animation = "idle"
+#	anim.play("idle")
 	set_physics_process(true)
 
 ### ACTIONS ###
@@ -91,18 +92,19 @@ func deal_damage(atk, def, critical, modifier):
 		
 		# Deal damage
 		defender.stats["health"] -= round(total_damage)
-		print(defender.stats["health"])
+		#print(defender.stats["health"])
 
 func destroy():
 	if is_in_group("enemy"):
 		queue_free()
 		emit_signal("battle_won")
 
-func change_anim(sprite):
-	if sprite.texture != sprites[sprite]:
-		sprite.texture = sprites[sprite]
-		anim.playback_speed = anim_speed[sprite]
-		anim.play(sprite)
+func change_anim(image):
+	if sprite.texture != sprites[image]:
+		sprite.texture = sprites[image]
+		anim.playback_speed = anim_speed[image]
+		anim.play(image)
+		set_pivot("bottom_center")
 
 func _physics_process(delta):
 	var dis = draw_health - stats_object.stats["health"]
@@ -114,6 +116,7 @@ func _physics_process(delta):
 
 ### STATES ###
 func idle_state():
+	change_anim("idle")
 	z_index = 0
 	if battle.play:
 		var action_rate = (stats_object.stats["speed"]+stats_object.level) / 15
@@ -126,6 +129,7 @@ func idle_state():
 			action_meter = 0
 
 func action_state():
+	change_anim("idle")
 	z_index = 1
 	
 	if self.is_in_group("enemy"):
@@ -138,23 +142,43 @@ func approach_state():
 	ui.visible = false
 	# Set up
 	var target_x = start_pos.x + gdata.BATTLE_SPACE * sprite.scale.x
-	var speed = 8
+	change_anim("approach")
+	var sprite_frames = sprite.vframes * sprite.hframes
+	var speed = min(14, 38/sprite_frames)
+	# Anim speed
+	var frames = gdata.get_frames(target_x, start_pos.x, speed)
+	anim.playback_speed = gdata.get_image_speed_from_frames(frames, sprite_frames)
 	# Move to target
 	position.x = gdata.approach(position.x, target_x, speed)
 	if position.x == target_x:
+		print(anim.playback_speed)
 		state = "attack_state"
+		attacked = false
 
 func attack_state():
-	var foe = ray.get_collider().get_parent()
-	if foe != null and foe.is_in_group("unit"):
-		deal_damage(self, foe, gdata.chance(stats_object.stats["critical"]/100), 1)
+	change_anim("attack")
+	if sprite.frame == 1 and not attacked:
+		var foe = ray.get_collider().get_parent()
+		if foe != null and foe.is_in_group("unit"):
+			deal_damage(self, foe, gdata.chance(stats_object.stats["critical"]/100), 1)
+			attacked = true
+	if not anim.is_playing():
 		state = "return_state"
+		attacked = false
 
 func return_state():
 	var target_x = start_pos.x
-	var speed = 8
+	change_anim("return")
+	var sprite_frames = sprite.vframes * sprite.hframes
+	var speed = 3
+	# Anim speed
+	var frames = gdata.get_frames(target_x, start_pos.x+gdata.BATTLE_SPACE*sprite.scale.x, speed)
+	anim.playback_speed = gdata.get_image_speed_from_frames(frames, sprite_frames)
+	# Move back
+	speed = 5
 	position.x = gdata.approach(position.x, target_x, speed)
 	if position.x == target_x:
+		print(anim.playback_speed)
 		state = "idle_state"
 		ui.visible = true
 		battle.play = true

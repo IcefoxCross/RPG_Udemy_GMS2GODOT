@@ -46,7 +46,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack"
-length = 0.4
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
 tracks/0/interp = 1
@@ -57,7 +57,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 4 ]
+"values": [ 3 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:frame")
@@ -66,10 +66,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [ 0, 1, 2 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -159,7 +159,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "return"
-length = 0.5
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
 tracks/0/interp = 1
@@ -170,7 +170,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 5 ]
+"values": [ 1 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:frame")
@@ -179,10 +179,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4 ]
+"values": [ 0 ]
 }
 
 [sub_resource type="RectangleShape2D" id=7]
@@ -271,13 +271,12 @@ script = ExtResource( 12 )
 [node name="Units" type="Node" parent="."]
 
 [node name="EnemyUnit" parent="Units" instance=ExtResource( 13 )]
-editor/display_folded = true
 position = Vector2( 736, 224 )
 sprite_offset = Vector2( 0, 4 )
 unit_name = "spider"
 
 [node name="Sprite" parent="Units/EnemyUnit" index="0"]
-hframes = 8
+hframes = 3
 frame = 0
 
 [node name="AnimationPlayer" parent="Units/EnemyUnit" index="1"]
@@ -291,15 +290,15 @@ anims/return = SubResource( 6 )
 [node name="RayCast2D" parent="Units/EnemyUnit" index="3"]
 position = Vector2( 8, -16 )
 
-[node name="Area2D" parent="Units/EnemyUnit" index="4"]
-editor/display_folded = true
-
 [node name="CollisionShape2D" parent="Units/EnemyUnit/Area2D" index="0"]
 shape = SubResource( 7 )
 
 [node name="PlayerUnit" parent="Units" instance=ExtResource( 14 )]
 editor/display_folded = true
 position = Vector2( 544, 224 )
+
+[node name="Area2D" parent="Units/PlayerUnit" index="4"]
+editor/display_folded = false
 
 [node name="IdleView" type="TileMap" parent="."]
 visible = false
