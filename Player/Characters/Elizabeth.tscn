@@ -260,3 +260,8 @@ anims/walkup = SubResource( 9 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 16 )
+collide_with_areas = true
+

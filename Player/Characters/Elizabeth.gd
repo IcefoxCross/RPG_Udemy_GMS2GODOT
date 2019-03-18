@@ -8,6 +8,7 @@ signal encounter
 
 onready var anim = $AnimationPlayer
 onready var camera = $Camera2D
+onready var ray = $RayCast2D
 
 var motion = Vector2()
 var spritedir = "down"
@@ -28,6 +29,15 @@ func start(pos, dir = "down"):
 	camera.smoothing_enabled = false
 	position = pos
 	spritedir = dir
+	match dir:
+		"left":
+			ray.cast_to = Vector2(-16,0)
+		"right":
+			ray.cast_to = Vector2(16,0)
+		"up":
+			ray.cast_to = Vector2(0,-16)
+		"down":
+			ray.cast_to = Vector2(0,16)
 	yield(get_tree().create_timer(0.1),"timeout")
 	camera.smoothing_enabled = true
 
@@ -44,6 +54,14 @@ func _physics_process(delta):
 	else:
 		anim_switch("idle")
 
+func _unhandled_input(event):
+	if event.is_action_pressed("action"):
+		var obj = interactable()
+		if obj != null:
+			obj.interact()
+		else:
+			print("none")
+
 func get_input():
 	motion.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	motion.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
@@ -52,12 +70,16 @@ func spritedir_loop():
 	match motion:
 		Vector2(-1,0):
 			spritedir = "left"
+			ray.cast_to = Vector2(-16,0)
 		Vector2(1,0):
 			spritedir = "right"
+			ray.cast_to = Vector2(16,0)
 		Vector2(0,-1):
 			spritedir = "up"
+			ray.cast_to = Vector2(0,-16)
 		Vector2(0,1):
 			spritedir = "down"
+			ray.cast_to = Vector2(0,16)
 
 func anim_switch(animation):
 	var new_anim = str(animation,spritedir)
@@ -80,3 +102,10 @@ func move_state():
 
 func wait_state():
 	stop()
+
+func interactable():
+	var obj = ray.get_collider()
+	if obj != null and obj.get_parent().is_in_group("interact"):
+		return obj.get_parent()
+	else:
+		return null

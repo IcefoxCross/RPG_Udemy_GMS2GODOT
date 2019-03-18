@@ -69,11 +69,7 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	anim_speed["hit"] = hit_speed
 	anim_speed["ranged"] = range_speed
 	
-#	anim.playback_speed = anim_speed["idle"]
-#	sprite.texture = sprites["idle"]
 	change_anim("idle")
-#	#anim.current_animation = "idle"
-#	anim.play("idle")
 	set_physics_process(true)
 
 ### ACTIONS ###
@@ -158,8 +154,8 @@ func approach_state():
 func attack_state():
 	change_anim("attack")
 	if sprite.frame == 1 and not attacked:
-		var foe = ray.get_collider().get_parent()
-		if foe != null and foe.is_in_group("unit"):
+		var foe = ray.get_collider()
+		if foe != null and foe.get_parent().is_in_group("unit"):
 			deal_damage(self, foe, gdata.chance(stats_object.stats["critical"]/100), 1)
 			attacked = true
 	if not anim.is_playing():
