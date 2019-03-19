@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/Dialog/Dialog.gd" type="Script" id=1]
+[ext_resource path="res://UI/Assets/Dialog/s_dialog_frame_0.png" type="Texture" id=2]
+[ext_resource path="res://UI/Assets/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://UI/Assets/Dialog/s_portrait_frame_0.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 9
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="Dialog" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="Control"]
+modulate = Color( 1, 1, 1, 0.5 )
+margin_right = 320.0
+margin_bottom = 180.0
+
+[node name="DialogBox" type="TextureRect" parent="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/DialogBox"]
+margin_left = 17.0
+margin_top = 4.0
+margin_right = 174.0
+margin_bottom = 43.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+scroll_active = false
+scroll_following = true
+
+[node name="Timer" type="Timer" parent="Control/DialogBox"]
+
+[node name="PortraitFrame" type="TextureRect" parent="Control"]
+margin_right = 81.0
+margin_bottom = 70.0
+texture = ExtResource( 4 )
+
+[node name="Portrait" type="TextureRect" parent="Control/PortraitFrame"]
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 65.0
+margin_bottom = 65.0
+expand = true
+
+[connection signal="timeout" from="Control/DialogBox/Timer" to="." method="_on_Timer_timeout"]

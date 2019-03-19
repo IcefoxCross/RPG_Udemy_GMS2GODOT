@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MainScenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://Player/Characters/Elizabeth.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Assets/b_vignette.png" type="Texture" id=3]
 [ext_resource path="res://MainScenes/Battle/RandomEncounters.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/Dialog/Dialog.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -20,6 +21,7 @@ move_speed = 75.0
 editor/display_folded = true
 
 [node name="Control" type="Control" parent="Common/GUI"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -39,4 +41,6 @@ __meta__ = {
 
 [node name="RandomEncounters" parent="Common" instance=ExtResource( 4 )]
 on = false
+
+[node name="Dialog" parent="Common" instance=ExtResource( 5 )]
 
