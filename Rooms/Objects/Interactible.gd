@@ -1,7 +1,9 @@
 extends Node2D
 
+var other
+
 func _ready():
 	z_index = position.y
 
-func interact():
-	pass
+func interact(body):
+	other = body

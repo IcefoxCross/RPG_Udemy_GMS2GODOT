@@ -6,6 +6,8 @@ onready var portrait_frame = $Control/PortraitFrame
 onready var portrait = $Control/PortraitFrame/Portrait
 onready var timer = $Control/DialogBox/Timer
 
+signal finished
+
 # CHAR LIMIT (FONT 9) = 156
 var text = ["Test. dialog", "Test? dialog 2."]
 var char_stopper = [".", "?", "!"]
@@ -31,11 +33,11 @@ func _ready():
 	box.rect_position = pos
 	portrait_frame.rect_position = portrait_pos
 	
-	init(text, "res://UI/Assets/Dialog/s_default_portrait_0.png")
+	#init(text, load("res://UI/Assets/Dialog/s_default_portrait_0.png"))
 
 func init(dialog, p_sprite, font_size = 9, text_speed = 0.05):
 	text = dialog
-	portrait.texture = load(p_sprite)
+	portrait.texture = p_sprite
 	portrait.rect_size = portrait_size
 	text_page = 0
 	text_visible.get("custom_fonts/normal_font").size = font_size
@@ -49,10 +51,8 @@ func start():
 	timer.start()
 
 func end():
+	emit_signal("finished")
 	queue_free()
-#	$Control.visible = false
-#	set_process_input(false)
-#	timer.stop()
 
 func _input(event):
 	if event.is_action_pressed("action"):

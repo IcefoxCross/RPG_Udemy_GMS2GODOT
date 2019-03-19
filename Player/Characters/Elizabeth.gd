@@ -58,10 +58,35 @@ func _unhandled_input(event):
 	if event.is_action_pressed("action"):
 		var obj = interactable()
 		if obj != null:
-			obj.interact()
+			obj.interact(self)
 		else:
 			print("none")
 
+
+### STATES ###
+func move_state():
+	get_input()
+	spritedir_loop()
+	motion = move_and_slide(motion.normalized() * move_speed)
+	
+	if last_encounter == null:
+		last_encounter = LASTE.instance()
+		add_child(last_encounter)
+		last_encounter.position = position
+		last_encounter.distance = rand_range(32, (camera.limit_right - camera.limit_left)/2)
+	else:
+		if position.distance_to(last_encounter.position) >= last_encounter.distance:
+			emit_signal("encounter")
+
+func wait_state():
+	stop()
+
+func talking_state():
+	anim_switch("idle")
+	if not get_tree().has_group("dialog"):
+		state = "move_state"
+
+### FUNCS ###
 func get_input():
 	motion.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	motion.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
@@ -85,23 +110,6 @@ func anim_switch(animation):
 	var new_anim = str(animation,spritedir)
 	if anim.current_animation != new_anim:
 		anim.play(new_anim)
-
-func move_state():
-	get_input()
-	spritedir_loop()
-	motion = move_and_slide(motion.normalized() * move_speed)
-	
-	if last_encounter == null:
-		last_encounter = LASTE.instance()
-		add_child(last_encounter)
-		last_encounter.position = position
-		last_encounter.distance = rand_range(32, (camera.limit_right - camera.limit_left)/2)
-	else:
-		if position.distance_to(last_encounter.position) >= last_encounter.distance:
-			emit_signal("encounter")
-
-func wait_state():
-	stop()
 
 func interactable():
 	var obj = ray.get_collider()
