@@ -4,6 +4,8 @@ extends Node
 const BATTLE_SPACE = 160
 
 ### VARS ###
+var pause_enabled
+
 var direction = {
 	"center": Vector2(0,0),
 	"left": Vector2(-1,0),

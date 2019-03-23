@@ -6,6 +6,7 @@ onready var randenc = $Common/RandomEncounters
 
 const FADE = preload("res://UI/FadeTransition.tscn")
 const BATTLE = preload("res://UI/BattleTransition.tscn")
+const OPTIONS = preload("res://UI/Menus/OptionsMenu.tscn")
 
 var current_room
 
@@ -17,9 +18,11 @@ func _ready():
 	player.start(Vector2(gdata.last_room["x"],gdata.last_room["y"]),gdata.last_room["dir"])
 	current_room.connect("change_room", self, "_change_room")
 	player.connect("encounter", self, "encounter")
+	player.connect("menu_call", self, "call_menu")
 	var fade = FADE.instance()
 	get_tree().current_scene.add_child(fade)
 	fade.fade(0)
+	gdata.pause_enabled = true
 	yield(fade, "fade_done")
 
 func encounter():
@@ -37,6 +40,11 @@ func encounter():
 		yield(fade, "fade_done")
 		#gdata.switch_scene("res://MainScenes/Battle/Battle.tscn")
 		get_tree().change_scene("res://MainScenes/Battle/Battle.tscn")
+
+func call_menu():
+	if not gui.find_node("OptionsMenu"):
+		var options = OPTIONS.instance()
+		gui.add_child(options)
 
 func _change_room(target_room):
 	call_deferred("_change_room_deferred", target_room)

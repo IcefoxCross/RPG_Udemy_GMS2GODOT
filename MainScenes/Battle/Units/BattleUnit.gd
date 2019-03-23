@@ -156,7 +156,7 @@ func attack_state():
 	if sprite.frame == 1 and not attacked:
 		var foe = ray.get_collider()
 		if foe != null and foe.get_parent().is_in_group("unit"):
-			deal_damage(self, foe, gdata.chance(stats_object.stats["critical"]/100), 1)
+			deal_damage(self, foe.get_parent(), gdata.chance(stats_object.stats["critical"]/100), 1)
 			attacked = true
 	if not anim.is_playing():
 		state = "return_state"

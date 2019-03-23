@@ -5,6 +5,7 @@ export (float) var move_speed = 100.0
 const LASTE = preload("res://MainScenes/Battle/LastEncounter.tscn")
 
 signal encounter
+signal menu_call
 
 onready var anim = $AnimationPlayer
 onready var camera = $Camera2D
@@ -61,6 +62,9 @@ func _unhandled_input(event):
 			obj.interact(self)
 		else:
 			print("none")
+	if event.is_action_pressed("ui_cancel"):
+		if state == "move_state":
+			emit_signal("menu_call")
 
 
 ### STATES ###
