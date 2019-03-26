@@ -25,12 +25,6 @@ func _ready():
 	gdata.pause_enabled = true
 	yield(fade, "fade_done")
 
-func _unhandled_input(event):
-	if event.is_action_pressed("action"):
-		var msg = load("res://UI/Message.tscn").instance()
-		gui.add_child(msg)
-		msg.initialize_centered("The message is centered!")
-
 func encounter():
 	if player == null or randenc == null:
 		return
