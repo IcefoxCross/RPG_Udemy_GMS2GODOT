@@ -9,12 +9,11 @@ func _ready():
 	get_tree().paused = true
 	for button in options_list.get_children():
 		button.connect("focus_entered", self, "_on_Button_focus_entered")
-		button.connect("pressed", self, "_on_Button_pressed")
+		button.connect("pressed", self, "_on_Button_pressed", [button])
 	first_option.grab_focus()
 
-func _on_Button_pressed():
-	var focused = options_list.get_focus_owner()
-	print(focused.name)
+func _on_Button_pressed(button):
+	print(button.name)
 
 func _on_Button_focus_entered():
 	var focused = options_list.get_focus_owner()
