@@ -7,6 +7,7 @@ onready var randenc = $Common/RandomEncounters
 const FADE = preload("res://UI/FadeTransition.tscn")
 const BATTLE = preload("res://UI/BattleTransition.tscn")
 const OPTIONS = preload("res://UI/Menus/OptionsMenu.tscn")
+const MSG = preload("res://UI/Message.tscn")
 
 var current_room
 
@@ -45,6 +46,16 @@ func call_menu():
 	if not gui.find_node("OptionsMenu"):
 		var options = OPTIONS.instance()
 		gui.add_child(options)
+
+func create_message(x, y, text):
+	var msg = MSG.instance()
+	msg.initialize(x, y, text)
+	gui.add_child(msg)
+
+func create_message_centered(text):
+	var msg = MSG.instance()
+	msg.initialize_centered(text)
+	gui.add_child(msg)
 
 func _change_room(target_room):
 	call_deferred("_change_room_deferred", target_room)

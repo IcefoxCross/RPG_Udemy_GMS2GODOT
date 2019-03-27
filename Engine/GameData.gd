@@ -84,3 +84,18 @@ func get_class_data():
 		}
 	}
 	return to_json(classes)
+
+#### ITEMS ####
+var items = parse_json(get_item_data())
+
+func get_item_data():
+	var items = {
+		"potion": {
+			"name": "Potion",
+			"effect": "heal_effect",
+			"info": "A potion that heals 50 health.",
+			"arguments": [50],
+			"battle": false
+		}
+	}
+	return to_json(items)

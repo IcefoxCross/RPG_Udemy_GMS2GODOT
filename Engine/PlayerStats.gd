@@ -48,3 +48,27 @@ func update_draw_health():
 		draw_health = lerp(draw_health, stats["health"], .1)
 	else:
 		draw_health = stats["health"]
+
+### ITEMS ###
+func pickup_item(item, amount):
+	if items.has(item):
+		items[item] += amount
+	else:
+		items[item] = amount
+
+func drop_item(item, amount):
+	if items.has(item):
+		items[item] -= amount
+		if items[item] <= 0:
+			items.erase(item)
+
+func use_item(item):
+	if items.has(item):
+		var _item = gdata.items[item]
+		# Exit case
+		if _item["battle"] and get_tree().current_scene.name != "Battle":
+			get_tree().current_scene.create_message_centered("You cannot use this\nitem outside of battle.")
+			return
+		drop_item(item, 1)
+		#call(_item["effect"], _item["arguments"])
+		print("Used %s" % _item["name"])
