@@ -1,6 +1,6 @@
 extends Control
 
-#signal closed
+signal get_focus
 
 onready var foreground = $NinePatchRect/ColorRect
 
@@ -11,6 +11,7 @@ var previous
 
 func _ready():
 	self.focus = true
+	connect("get_focus", self, "_on_Get_Focus")
 
 func _input(event):
 #	if event.is_action_pressed("ui_left"):
@@ -51,3 +52,7 @@ func _input(event):
 func set_focus(value):
 	focus = value
 	foreground.visible = not value
+	if focus: emit_signal("get_focus")
+
+func _on_Get_Focus():
+	pass

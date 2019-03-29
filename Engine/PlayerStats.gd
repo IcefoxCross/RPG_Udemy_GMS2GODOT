@@ -15,7 +15,7 @@ func _ready():
 	items = {}
 	actions = []
 	stats = get_stats_from_class("elizabeth")
-	pickup_item("potion",1)
+	pickup_item("potion",2)
 	
 	draw_health = stats["health"]
 

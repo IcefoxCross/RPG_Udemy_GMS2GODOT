@@ -1,23 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/Menus/NestMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/Menus/OptionsMenu.gd" type="Script" id=2]
 [ext_resource path="res://UI/Assets/s_ui_caret_0.png" type="Texture" id=3]
-[ext_resource path="res://UI/Assets/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://UI/Assets/MenuFont.tres" type="DynamicFont" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="DynamicFont" id=2]
-size = 10
-font_data = ExtResource( 4 )
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=5]
-
-[sub_resource type="StyleBoxEmpty" id=6]
 
 [node name="OptionsMenu" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -57,7 +53,7 @@ margin_bottom = 16.0
 focus_neighbour_top = NodePath("../ExitButton")
 focus_neighbour_bottom = NodePath("../ItemsButton")
 custom_styles/focus = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 button_mask = 0
 text = "Stats"
 flat = true
@@ -68,8 +64,8 @@ margin_right = 36.0
 margin_bottom = 29.0
 focus_neighbour_top = NodePath("../StatsButton")
 focus_neighbour_bottom = NodePath("../SaveButton")
-custom_styles/focus = SubResource( 3 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 button_mask = 0
 text = "Items"
 flat = true
@@ -80,8 +76,8 @@ margin_right = 36.0
 margin_bottom = 42.0
 focus_neighbour_top = NodePath("../ItemsButton")
 focus_neighbour_bottom = NodePath("../LoadButton")
-custom_styles/focus = SubResource( 4 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 button_mask = 0
 text = "Save"
 flat = true
@@ -92,8 +88,8 @@ margin_right = 36.0
 margin_bottom = 55.0
 focus_neighbour_top = NodePath("../SaveButton")
 focus_neighbour_bottom = NodePath("../ExitButton")
-custom_styles/focus = SubResource( 5 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 4 )
+custom_fonts/font = ExtResource( 4 )
 button_mask = 0
 text = "Load"
 flat = true
@@ -104,9 +100,10 @@ margin_right = 36.0
 margin_bottom = 68.0
 focus_neighbour_top = NodePath("../LoadButton")
 focus_neighbour_bottom = NodePath("../StatsButton")
-custom_styles/focus = SubResource( 6 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/focus = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
 button_mask = 0
 text = "Exit"
 flat = true
 
+[connection signal="focus_entered" from="." to="." method="_on_OptionsMenu_focus_entered"]

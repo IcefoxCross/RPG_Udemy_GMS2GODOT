@@ -147,7 +147,6 @@ func approach_state():
 	# Move to target
 	position.x = GData.approach(position.x, target_x, speed)
 	if position.x == target_x:
-		print(anim.playback_speed)
 		state = "attack_state"
 		attacked = false
 
@@ -174,7 +173,6 @@ func return_state():
 	speed = 5
 	position.x = GData.approach(position.x, target_x, speed)
 	if position.x == target_x:
-		print(anim.playback_speed)
 		state = "idle_state"
 		ui.visible = true
 		battle.play = true

@@ -5,4 +5,3 @@ func _ready():
 
 func interact(body):
 	.interact(body)
-	print("!!!")
