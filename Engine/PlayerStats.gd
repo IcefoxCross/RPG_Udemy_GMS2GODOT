@@ -10,11 +10,12 @@ var draw_health
 
 func _ready():
 	level = 3
-	_class = gdata.classes["elizabeth"]
+	_class = GData.classes["elizabeth"]
 	
 	items = {}
 	actions = []
 	stats = get_stats_from_class("elizabeth")
+	pickup_item("potion",1)
 	
 	draw_health = stats["health"]
 
@@ -35,7 +36,7 @@ func calculate_health(level, health):
 	return round((health*3)+(level*3))
 
 func get_stats_from_class(c):
-	var stats = gdata.classes[c]
+	var stats = GData.classes[c]
 	stats["maxhealth"] = calculate_health(level, stats["health"])
 	stats["health"] = stats["maxhealth"]
 	if c == "elizabeth":
@@ -64,7 +65,7 @@ func drop_item(item, amount):
 
 func use_item(item):
 	if items.has(item):
-		var _item = gdata.items[item]
+		var _item = GData.items[item]
 		# Exit case
 		if _item["battle"] and get_tree().current_scene.name != "Battle":
 			get_tree().current_scene.create_message_centered("You cannot use this\nitem outside of battle.")

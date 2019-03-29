@@ -25,5 +25,5 @@ func end_battle():
 	get_tree().current_scene.add_child(fade)
 	fade.fade(1)
 	yield(fade, "fade_done")
-	#gdata.load_scene()
+	#GData.load_scene()
 	get_tree().change_scene("res://MainScenes/Main.tscn")

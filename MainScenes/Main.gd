@@ -12,18 +12,18 @@ const MSG = preload("res://UI/Message.tscn")
 var current_room
 
 func _ready():
-	var new_room = load(gdata.last_room["room"]).instance()
+	var new_room = load(GData.last_room["room"]).instance()
 	$Room.add_child(new_room)
 	new_room.init(player)
 	current_room = new_room
-	player.start(Vector2(gdata.last_room["x"],gdata.last_room["y"]),gdata.last_room["dir"])
+	player.start(Vector2(GData.last_room["x"],GData.last_room["y"]),GData.last_room["dir"])
 	current_room.connect("change_room", self, "_change_room")
 	player.connect("encounter", self, "encounter")
 	player.connect("menu_call", self, "call_menu")
 	var fade = FADE.instance()
 	get_tree().current_scene.add_child(fade)
 	fade.fade(0)
-	gdata.pause_enabled = true
+	GData.pause_enabled = true
 	yield(fade, "fade_done")
 
 func encounter():
@@ -31,15 +31,15 @@ func encounter():
 		return
 	if randenc.on and not get_tree().current_scene.has_node("/BattleTransition"):
 		player.state = "wait_state"
-		gdata.last_room["room"] = current_room.filename
-		gdata.last_room["x"] = player.position.x
-		gdata.last_room["y"] = player.position.y
-		gdata.last_room["dir"] = player.spritedir
+		GData.last_room["room"] = current_room.filename
+		GData.last_room["x"] = player.position.x
+		GData.last_room["y"] = player.position.y
+		GData.last_room["dir"] = player.spritedir
 		var fade = BATTLE.instance()
 		get_tree().current_scene.add_child(fade)
 		fade.fade(1)
 		yield(fade, "fade_done")
-		#gdata.switch_scene("res://MainScenes/Battle/Battle.tscn")
+		#GData.switch_scene("res://MainScenes/Battle/Battle.tscn")
 		get_tree().change_scene("res://MainScenes/Battle/Battle.tscn")
 
 func call_menu():

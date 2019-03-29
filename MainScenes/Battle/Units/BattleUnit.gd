@@ -45,10 +45,10 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	# Stats object
 	stats_object = self
 	if not is_enemy:
-		stats_object = Stats
+		stats_object = PStats
 	# Enemy stats
 	if is_enemy:
-		stats = Stats.get_stats_from_class(_name)
+		stats = PStats.get_stats_from_class(_name)
 	self.level = _level
 	self.draw_health = stats_object.stats["health"]
 	sprite.scale.x =  -1 if is_enemy else 1
@@ -137,15 +137,15 @@ func action_state():
 func approach_state():
 	ui.visible = false
 	# Set up
-	var target_x = start_pos.x + gdata.BATTLE_SPACE * sprite.scale.x
+	var target_x = start_pos.x + GData.BATTLE_SPACE * sprite.scale.x
 	change_anim("approach")
 	var sprite_frames = sprite.vframes * sprite.hframes
 	var speed = min(14, 38/sprite_frames)
 	# Anim speed
-	var frames = gdata.get_frames(target_x, start_pos.x, speed)
-	anim.playback_speed = gdata.get_image_speed_from_frames(frames, sprite_frames)
+	var frames = GData.get_frames(target_x, start_pos.x, speed)
+	anim.playback_speed = GData.get_image_speed_from_frames(frames, sprite_frames)
 	# Move to target
-	position.x = gdata.approach(position.x, target_x, speed)
+	position.x = GData.approach(position.x, target_x, speed)
 	if position.x == target_x:
 		print(anim.playback_speed)
 		state = "attack_state"
@@ -156,7 +156,7 @@ func attack_state():
 	if sprite.frame == 1 and not attacked:
 		var foe = ray.get_collider()
 		if foe != null and foe.get_parent().is_in_group("unit"):
-			deal_damage(self, foe.get_parent(), gdata.chance(stats_object.stats["critical"]/100), 1)
+			deal_damage(self, foe.get_parent(), GData.chance(stats_object.stats["critical"]/100), 1)
 			attacked = true
 	if not anim.is_playing():
 		state = "return_state"
@@ -168,11 +168,11 @@ func return_state():
 	var sprite_frames = sprite.vframes * sprite.hframes
 	var speed = 3
 	# Anim speed
-	var frames = gdata.get_frames(target_x, start_pos.x+gdata.BATTLE_SPACE*sprite.scale.x, speed)
-	anim.playback_speed = gdata.get_image_speed_from_frames(frames, sprite_frames)
+	var frames = GData.get_frames(target_x, start_pos.x+GData.BATTLE_SPACE*sprite.scale.x, speed)
+	anim.playback_speed = GData.get_image_speed_from_frames(frames, sprite_frames)
 	# Move back
 	speed = 5
-	position.x = gdata.approach(position.x, target_x, speed)
+	position.x = GData.approach(position.x, target_x, speed)
 	if position.x == target_x:
 		print(anim.playback_speed)
 		state = "idle_state"

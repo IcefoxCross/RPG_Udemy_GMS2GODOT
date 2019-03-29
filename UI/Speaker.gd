@@ -23,7 +23,7 @@ func interact(body):
 		dialog = dialog_object.instance()
 		dialog.connect("finished", self, "free_dialog")
 		get_tree().current_scene.add_child(dialog)
-		gdata.pause_enabled = false
+		GData.pause_enabled = false
 		
 		if dialog.name == "Dialog":
 			dialog.init(text, portrait, 12)
@@ -31,4 +31,4 @@ func interact(body):
 
 func free_dialog():
 	dialog = null
-	gdata.pause_enabled = true
+	GData.pause_enabled = true

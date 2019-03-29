@@ -50,7 +50,7 @@ func _physics_process(delta):
 	z_index = max(0,position.y)
 	motion = Vector2()
 	call(state)
-	if motion != gdata.direction["center"]:
+	if motion != GData.direction["center"]:
 		anim_switch("walk")
 	else:
 		anim_switch("idle")

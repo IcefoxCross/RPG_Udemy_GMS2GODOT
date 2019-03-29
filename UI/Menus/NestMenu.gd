@@ -2,6 +2,8 @@ extends Control
 
 #signal closed
 
+onready var foreground = $NinePatchRect/ColorRect
+
 var pause_state
 var focus setget set_focus
 var is_root = true
@@ -18,7 +20,7 @@ func _input(event):
 #		rect_position.x += 8
 #		get_tree().set_input_as_handled()
 	if event.is_action_pressed("ui_cancel"):
-		if is_root and gdata.pause_enabled:
+		if is_root and GData.pause_enabled:
 			pause_state = not get_tree().paused
 			get_tree().paused = pause_state
 			visible = pause_state
@@ -48,4 +50,4 @@ func _input(event):
 
 func set_focus(value):
 	focus = value
-	$NinePatchRect/ColorRect.visible = not value
+	foreground.visible = not value
