@@ -15,8 +15,12 @@ func _ready():
 
 func _on_Button_pressed(button):
 	match button.name:
+		"UseButton":
+			useOption()
 		"InfoButton":
 			print(GData.items.get(item.name).info)
+		"DropButton":
+			pass
 
 func _on_Button_focus_entered():
 	var focused = options_list.get_focus_owner()
@@ -26,3 +30,16 @@ func _on_Button_focus_entered():
 		else:
 			button.modulate = Color.thistle
 	caret.rect_position.y = focused.rect_position.y + (focused.rect_size.y / 2) - 3
+
+func useOption():
+	var battler = get_tree().current_scene.find_node("PlayerUnit")
+	if battler:
+		battler.state = "use_item_state"
+		battler.item_name = item.name
+		print("Use Item")
+	else:
+		PStats.use_item(item.name)
+		var ev = InputEventAction.new()
+		ev.action = "ui_cancel"
+		ev.pressed = true
+		Input.parse_input_event(ev)

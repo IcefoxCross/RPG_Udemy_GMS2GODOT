@@ -99,3 +99,9 @@ func get_item_data():
 		}
 	}
 	return to_json(items)
+
+### ITEM EFFECTS ###
+func heal_effect(args):
+	var amount = args[0]
+	PStats.stats["health"] = min(PStats.stats["health"] + amount, PStats.stats["maxhealth"])
+	print("Player was healed")

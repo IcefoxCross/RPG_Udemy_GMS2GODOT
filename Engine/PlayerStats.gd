@@ -71,5 +71,4 @@ func use_item(item):
 			get_tree().current_scene.create_message_centered("You cannot use this\nitem outside of battle.")
 			return
 		drop_item(item, 1)
-		#call(_item["effect"], _item["arguments"])
-		print("Used %s" % _item["name"])
+		GData.call(_item["effect"], _item["arguments"])

@@ -52,4 +52,7 @@ func _on_ItemList_item_activated(index):
 	last_focus = index
 
 func _on_Get_Focus():
-	if last_focus: list.select(last_focus)
+	if last_focus and list.get_item_count() > last_focus:
+		list.select(last_focus)
+	else:
+		list.select(0)

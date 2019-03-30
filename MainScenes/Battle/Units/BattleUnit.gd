@@ -20,7 +20,7 @@ var draw_health setget set_draw_health
 
 var action_meter setget set_action_meter
 var max_action_meter
-var item_index
+var item_name
 var state
 
 var stats_object
@@ -34,7 +34,7 @@ var attacked
 func _ready():
 	max_action_meter = 100
 	self.action_meter = 0
-	item_index = 0
+	item_name = null
 	state = "idle_state"
 	ui.visible = true
 	start_pos = position

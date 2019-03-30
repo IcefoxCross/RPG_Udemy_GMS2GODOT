@@ -20,13 +20,14 @@ func _ready():
 func _on_Button_pressed(button):
 	match button.name:
 		"ItemsButton":
-			self.focus = false
-			var menu = ITEMS_MENU.instance()
-			menu.rect_position.x = npr.rect_position.x + npr.rect_size.x + 4
-			menu.rect_position.y = npr.rect_position.y
-			menu.is_root = false
-			menu.previous = self
-			add_child(menu)
+			if PStats.items.size() > 0:
+				self.focus = false
+				var menu = ITEMS_MENU.instance()
+				menu.rect_position.x = npr.rect_position.x + npr.rect_size.x + 4
+				menu.rect_position.y = npr.rect_position.y
+				menu.is_root = false
+				menu.previous = self
+				add_child(menu)
 	last_focus = button
 
 func _on_Button_focus_entered():
