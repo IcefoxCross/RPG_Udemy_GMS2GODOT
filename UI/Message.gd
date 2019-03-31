@@ -3,11 +3,14 @@ extends PanelContainer
 onready var npr = $NinePatchRect
 onready var text = $MarginContainer/Text
 
+signal message_done
+
 var cutscene = null
 
 func _ready():
+	pass
 	#initialize(16,16,"Level Up!\nCheck the Menu for details.")
-	initialize_centered("Level Up!\nCheck the Menu for details.")
+	#initialize_centered("Level Up!\nCheck the Menu for details.")
 #	text.text = "Level Up!"
 #	rect_size.y += 12
 #	margin_left -= 8
@@ -26,14 +29,17 @@ func initialize_centered(msg):
 	rect_position = Vector2((width/2) - (rect_size.x / 2),(height/2) - (rect_size.y / 2))
 
 func _input(event):
-	if event.is_action_pressed("action") or event.is_action_pressed("back"):
-		get_tree().set_input_as_handled()
+	if event.is_action_pressed("action") or event.is_action_pressed("back") or event.is_action_pressed("ui_cancel"):
+		if not event.is_action_pressed("ui_cancel"):
+			get_tree().set_input_as_handled()
 		if cutscene:
 			cutscene.action += 1
 		queue_free()
+		emit_signal("message_done")
 
 
 func _on_Timer_timeout():
 	if cutscene:
 		cutscene.action += 1
 	queue_free()
+	emit_signal("message_done")

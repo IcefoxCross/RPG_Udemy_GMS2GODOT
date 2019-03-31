@@ -19,7 +19,7 @@ font_data = ExtResource( 4 )
 size = 8
 font_data = ExtResource( 4 )
 
-[node name="ItemUseMenu" index="0" instance=ExtResource( 1 )]
+[node name="ItemUseMenu" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="NinePatchRect" parent="." index="0"]

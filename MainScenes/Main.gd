@@ -49,13 +49,15 @@ func call_menu():
 
 func create_message(x, y, text):
 	var msg = MSG.instance()
-	msg.initialize(x, y, text)
 	gui.add_child(msg)
+	msg.initialize(x, y, text)
+	return msg
 
 func create_message_centered(text):
 	var msg = MSG.instance()
 	msg.initialize_centered(text)
 	gui.add_child(msg)
+	return msg
 
 func _change_room(target_room):
 	call_deferred("_change_room_deferred", target_room)

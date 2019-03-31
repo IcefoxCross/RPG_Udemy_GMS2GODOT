@@ -93,7 +93,7 @@ func get_item_data():
 		"potion": {
 			"name": "Potion",
 			"effect": "heal_effect",
-			"info": "A potion that heals 50 health.",
+			"info": "A potion that\nheals 50 health.",
 			"arguments": [50],
 			"battle": false
 		}

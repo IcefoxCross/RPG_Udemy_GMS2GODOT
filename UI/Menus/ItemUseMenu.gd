@@ -1,8 +1,10 @@
 extends "res://UI/Menus/NestMenu.gd"
 
+onready var npr = $NinePatchRect
 onready var caret = $NinePatchRect/Caret
 onready var options_list = $NinePatchRect/CenterContainer/VBoxContainer
 onready var first_option = $NinePatchRect/CenterContainer/VBoxContainer/UseButton
+onready var info_option = $NinePatchRect/CenterContainer/VBoxContainer/InfoButton
 
 var item = null
 
@@ -18,7 +20,7 @@ func _on_Button_pressed(button):
 		"UseButton":
 			useOption()
 		"InfoButton":
-			print(GData.items.get(item.name).info)
+			infoOption()
 		"DropButton":
 			pass
 
@@ -43,3 +45,14 @@ func useOption():
 		ev.action = "ui_cancel"
 		ev.pressed = true
 		Input.parse_input_event(ev)
+
+func infoOption():
+	var info = GData.items.get(item.name).info
+	if info:
+		var msg = get_tree().current_scene.create_message(rect_global_position.x, rect_global_position.y, info)
+		msg.connect("message_done", self, "_message_done")
+		hide()
+
+func _message_done():
+	show()
+	info_option.grab_focus()
