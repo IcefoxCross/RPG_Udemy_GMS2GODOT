@@ -6,6 +6,8 @@ onready var options_list = $NinePatchRect/CenterContainer/VBoxContainer
 onready var first_option = $NinePatchRect/CenterContainer/VBoxContainer/UseButton
 onready var info_option = $NinePatchRect/CenterContainer/VBoxContainer/InfoButton
 
+signal item_updated
+
 var item = null
 
 func _ready():
@@ -22,7 +24,7 @@ func _on_Button_pressed(button):
 		"InfoButton":
 			infoOption()
 		"DropButton":
-			pass
+			dropOption()
 
 func _on_Button_focus_entered():
 	var focused = options_list.get_focus_owner()
@@ -38,7 +40,6 @@ func useOption():
 	if battler:
 		battler.state = "use_item_state"
 		battler.item_name = item.name
-		print("Use Item")
 	else:
 		PStats.use_item(item.name)
 		var ev = InputEventAction.new()
@@ -52,6 +53,10 @@ func infoOption():
 		var msg = get_tree().current_scene.create_message(rect_global_position.x, rect_global_position.y, info)
 		msg.connect("message_done", self, "_message_done")
 		hide()
+
+func dropOption():
+	PStats.drop_item(item.name, 1)
+	emit_signal("item_updated")
 
 func _message_done():
 	show()

@@ -30,13 +30,7 @@ func create_items_option_list():
 			"script": null
 		}
 		#var item = items_list[items_list.keys()[i]]
-		var option_text = "x%s %s" % [item.amount, GData.items[item.name].name]
-		if item.amount > 1:
-			option_text = "x%s %ss" % [item.amount, GData.items[item.name].name]
-		# Fit text to ui frame
-		if option_text.length() > 13:
-			option_text = "%s..." % option_text.substr(0, 10)
-		item["display"] = option_text
+		item["display"] = get_option_text(item)
 		_options.append(item)
 	return _options
 
@@ -48,10 +42,32 @@ func _on_ItemList_item_activated(index):
 	menu.is_root = false
 	menu.previous = self
 	menu.item = options[index]
+	menu.connect("item_updated", self, "update_list")
 	add_child(menu)
 	last_focus = index
 
+func update_list():
+	list.clear()
+	options = create_items_option_list()
+	for option in options:
+		list.add_item(option["display"])
+	if list.get_item_count() == 0:
+		queue_free()
+		previous.focus = true
+	else:
+		list.select(last_focus)
+
+func get_option_text(item):
+	var option_text = "x%s %s" % [item.amount, GData.items[item.name].name]
+	if item.amount > 1:
+		option_text = "x%s %ss" % [item.amount, GData.items[item.name].name]
+	# Fit text to ui frame
+	if option_text.length() > 13:
+		option_text = "%s..." % option_text.substr(0, 10)
+	return option_text
+
 func _on_Get_Focus():
+	list.grab_focus()
 	if last_focus and list.get_item_count() > last_focus:
 		list.select(last_focus)
 	else:
