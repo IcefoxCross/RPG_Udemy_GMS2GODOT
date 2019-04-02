@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/BattleUI.gd" type="Script" id=1]
+[ext_resource path="res://UI/Assets/Battle/UI/s_battle_ui_frame_0.png" type="Texture" id=2]
+[ext_resource path="res://UI/Assets/Battle/UI/s_battle_ui_action_0.png" type="Texture" id=3]
+[ext_resource path="res://UI/Assets/Battle/UI/s_battle_ui_item_0.png" type="Texture" id=4]
+[ext_resource path="res://UI/Assets/Battle/UI/s_battle_ui_run_0.png" type="Texture" id=5]
+
+[node name="BattleUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Frame" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -85.0
+margin_top = -40.0
+margin_right = 85.0
+texture = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Frame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = 6.0
+margin_right = -7.0
+margin_bottom = -18.0
+
+[node name="ActionIcon" type="TextureButton" parent="Frame/HBoxContainer"]
+margin_right = 48.0
+margin_bottom = 16.0
+focus_neighbour_left = NodePath("../RunIcon")
+focus_neighbour_right = NodePath("../ItemIcon")
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 3 )
+
+[node name="ItemIcon" type="TextureButton" parent="Frame/HBoxContainer"]
+margin_left = 52.0
+margin_right = 92.0
+margin_bottom = 16.0
+focus_neighbour_left = NodePath("../ActionIcon")
+focus_neighbour_right = NodePath("../RunIcon")
+size_flags_horizontal = 3
+texture_normal = ExtResource( 4 )
+
+[node name="RunIcon" type="TextureButton" parent="Frame/HBoxContainer"]
+margin_left = 96.0
+margin_right = 138.0
+margin_bottom = 16.0
+focus_neighbour_left = NodePath("../ItemIcon")
+focus_neighbour_right = NodePath("../ActionIcon")
+size_flags_horizontal = 3
+texture_normal = ExtResource( 5 )
+

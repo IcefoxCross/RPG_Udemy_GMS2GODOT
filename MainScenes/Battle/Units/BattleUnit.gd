@@ -131,8 +131,8 @@ func action_state():
 	if self.is_in_group("enemy"):
 		state = "approach_state"
 	
-	if Input.is_action_just_pressed("action"):
-		state = "approach_state"
+#	if Input.is_action_just_pressed("action"):
+#		state = "approach_state"
 
 func approach_state():
 	ui.visible = false
