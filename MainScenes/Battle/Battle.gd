@@ -2,6 +2,7 @@ extends Node2D
 
 const BATTLE = preload("res://UI/BattleTransition.tscn")
 const FADE = preload("res://UI/FadeTransition.tscn")
+const MSG = preload("res://UI/Message.tscn")
 
 onready var camera = $BattleCamera
 onready var enemy = $Units/EnemyUnit
@@ -27,3 +28,15 @@ func end_battle():
 	yield(fade, "fade_done")
 	#GData.load_scene()
 	get_tree().change_scene("res://MainScenes/Main.tscn")
+
+func create_message(x, y, text):
+	var msg = MSG.instance()
+	$CanvasLayer.add_child(msg)
+	msg.initialize(x, y, text)
+	return msg
+
+func create_message_centered(text):
+	var msg = MSG.instance()
+	msg.initialize_centered(text)
+	$CanvasLayer.add_child(msg)
+	return msg

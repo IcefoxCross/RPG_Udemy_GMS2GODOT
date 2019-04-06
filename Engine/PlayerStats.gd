@@ -9,13 +9,13 @@ var stats
 var draw_health
 
 func _ready():
-	level = 3
+	level = 1
 	_class = GData.classes["elizabeth"]
 	
 	items = {}
 	actions = []
 	stats = get_stats_from_class("elizabeth")
-	pickup_item("potion",2)
+	pickup_item("potion",3)
 	
 	draw_health = stats["health"]
 

@@ -42,10 +42,10 @@ func useOption():
 		battler.item_name = item.name
 	else:
 		PStats.use_item(item.name)
-		var ev = InputEventAction.new()
-		ev.action = "ui_cancel"
-		ev.pressed = true
-		Input.parse_input_event(ev)
+	var ev = InputEventAction.new()
+	ev.action = "ui_cancel"
+	ev.pressed = true
+	Input.parse_input_event(ev)
 
 func infoOption():
 	var info = GData.items.get(item.name).info

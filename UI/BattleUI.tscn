@@ -24,13 +24,14 @@ texture = ExtResource( 2 )
 [node name="HBoxContainer" type="HBoxContainer" parent="Frame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 25.0
+margin_left = 19.0
 margin_top = 6.0
-margin_right = -7.0
+margin_right = -13.0
 margin_bottom = -18.0
+custom_constants/separation = 15
 
 [node name="ActionIcon" type="TextureButton" parent="Frame/HBoxContainer"]
-margin_right = 48.0
+margin_right = 41.0
 margin_bottom = 16.0
 focus_neighbour_left = NodePath("../RunIcon")
 focus_neighbour_right = NodePath("../ItemIcon")
@@ -40,8 +41,8 @@ shortcut_in_tooltip = false
 texture_normal = ExtResource( 3 )
 
 [node name="ItemIcon" type="TextureButton" parent="Frame/HBoxContainer"]
-margin_left = 52.0
-margin_right = 92.0
+margin_left = 56.0
+margin_right = 89.0
 margin_bottom = 16.0
 focus_neighbour_left = NodePath("../ActionIcon")
 focus_neighbour_right = NodePath("../RunIcon")
@@ -49,7 +50,7 @@ size_flags_horizontal = 3
 texture_normal = ExtResource( 4 )
 
 [node name="RunIcon" type="TextureButton" parent="Frame/HBoxContainer"]
-margin_left = 96.0
+margin_left = 104.0
 margin_right = 138.0
 margin_bottom = 16.0
 focus_neighbour_left = NodePath("../ItemIcon")

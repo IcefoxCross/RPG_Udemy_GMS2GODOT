@@ -1,6 +1,7 @@
 extends Control
 
 signal get_focus
+signal erased
 
 onready var foreground = $NinePatchRect/ColorRect
 
@@ -30,14 +31,16 @@ func _input(event):
 #				self.focus = true
 #		elif not is_root:
 		queue_free()
+		emit_signal("erased")
 	if event.is_action_pressed("back"):
-		if get_tree().paused:
+		if get_tree().paused or get_tree().current_scene.name == "Battle":
 			if not is_root:
 				previous.focus = true
 			else:
 				get_tree().paused = false
 				visible = false
 			queue_free()
+			emit_signal("erased")
 			get_tree().set_input_as_handled()
 #	if event.is_action_pressed("action"):
 #		if get_tree().paused and focus:

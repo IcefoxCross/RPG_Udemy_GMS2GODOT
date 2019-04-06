@@ -1,11 +1,14 @@
 extends Control
 
+const ITEMS_MENU = preload("res://UI/Menus/ItemListMenu.tscn")
+
 onready var frame = $Frame
 onready var options = $Frame/HBoxContainer
 
 var target_y
 var enabled
 var Player
+var focus setget set_focus
 
 func _ready():
 	frame.rect_position.y = 204
@@ -24,15 +27,36 @@ func _process(delta):
 	frame.rect_position.y = lerp(frame.rect_position.y, target_y, .1)
 	if frame.rect_position.distance_to(Vector2(frame.rect_position.x, 140)) <= 16:
 		if options.get_focus_owner() == null and enabled:
-			options.get_children()[0].grab_focus()
+			if has_node("ItemListMenu"):
+				options.get_children()[1].grab_focus()
+			else:
+				options.get_children()[0].grab_focus()
 
 func _on_Button_Pressed(option):
-	print(option.name)
 	if Player and enabled:
 		match option.name:
 			"ActionIcon":
 				Player.state = "approach_state"
 				option.release_focus()
+			"ItemIcon":
+				enabled = false
+				if PStats.items.size() > 0:
+					var menu = ITEMS_MENU.instance()
+					menu.rect_position.x = frame.rect_global_position.x + 13
+					menu.rect_position.y = target_y - frame.rect_size.y * 2
+					menu.is_root = false
+					menu.previous = self
+					menu.connect("erased", self, "_on_ItemList_Erased")
+					var focused = options.get_focus_owner()
+					focused.release_focus()
+					add_child(menu)
+
+func _on_ItemList_Erased():
+	options.get_children()[1].grab_focus() 
+
+func set_focus(value):
+	focus = value
+	if focus: emit_signal("focus_entered")
 
 func _on_Focus_Entered(option):
 	var focused = options.get_focus_owner()

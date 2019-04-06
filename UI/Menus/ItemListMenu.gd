@@ -19,6 +19,10 @@ func _ready():
 		list.grab_focus()
 		list.select(0)
 
+func _input(event):
+	if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right"):
+		get_tree().set_input_as_handled()
+
 func create_items_option_list():
 	var _options = []
 	var items_list = PStats.items

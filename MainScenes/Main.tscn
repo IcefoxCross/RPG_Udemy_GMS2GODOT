@@ -38,5 +38,4 @@ __meta__ = {
 }
 
 [node name="RandomEncounters" parent="Common" instance=ExtResource( 4 )]
-on = false
 

@@ -30,6 +30,7 @@ var sprites = {}
 var battle
 var start_pos
 var attacked
+var used_item
 
 func _ready():
 	max_action_meter = 100
@@ -61,6 +62,7 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	sprites["return"] = load(str("res://MainScenes/Battle/Units/Assets/",_name,"/s_battle_",_name,"_return.png"))
 	sprites["hit"] = load(str("res://MainScenes/Battle/Units/Assets/",_name,"/s_battle_",_name,"_hit.png"))
 	sprites["ranged"] = load(str("res://MainScenes/Battle/Units/Assets/",_name,"/s_battle_",_name,"_ranged.png"))
+	sprites["use_item"] = load(str("res://MainScenes/Battle/Units/Assets/",_name,"/s_battle_",_name,"_use_item.png"))
 	
 	anim_speed["idle"] = idle_speed
 	anim_speed["approach"] = 0
@@ -68,6 +70,7 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	anim_speed["return"] = 0
 	anim_speed["hit"] = hit_speed
 	anim_speed["ranged"] = range_speed
+	anim_speed["use_item"] = 1
 	
 	change_anim("idle")
 	set_physics_process(true)
@@ -177,6 +180,15 @@ func return_state():
 		ui.visible = true
 		battle.play = true
 
+func use_item_state():
+	if is_in_group("enemy"):
+		state = "idle_state"
+		return
+	change_anim("use_item")
+	if sprite.frame == 4 and not used_item:
+		PStats.use_item(item_name)
+		used_item = true
+
 ### SETS ###
 func set_pivot(pivot):
 	match pivot:
@@ -194,3 +206,9 @@ func set_draw_health(value):
 func set_action_meter(value):
 	action_meter = value
 	ui.draw_action()
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "use_item":
+		state = "idle_state"
+		battle.play = true
+		used_item = false
