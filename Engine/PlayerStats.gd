@@ -36,7 +36,11 @@ func calculate_health(level, health):
 	return round((health*3)+(level*3))
 
 func get_stats_from_class(c):
-	var stats = GData.classes[c]
+	var stats
+	if c == "elizabeth":
+		stats = GData.classes[c]
+	else:
+		stats = GData.classes[c].duplicate()
 	stats["maxhealth"] = calculate_health(level, stats["health"])
 	stats["health"] = stats["maxhealth"]
 	if c == "elizabeth":

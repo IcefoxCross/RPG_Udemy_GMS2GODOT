@@ -105,3 +105,5 @@ func heal_effect(args):
 	var amount = args[0]
 	PStats.stats["health"] = min(PStats.stats["health"] + amount, PStats.stats["maxhealth"])
 	print(PStats.stats["health"])
+	if get_tree().current_scene.name == "Battle":
+		get_tree().current_scene.find_node("PlayerUnit").flash(Color.green)

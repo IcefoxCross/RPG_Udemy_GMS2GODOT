@@ -8,6 +8,7 @@ onready var sprite = $Sprite
 onready var anim = $AnimationPlayer
 onready var ui = $BattleUnitUI
 onready var ray = $RayCast2D
+onready var shader = $Sprite.material
 
 signal battle_won
 
@@ -23,12 +24,13 @@ var max_action_meter
 var item_name
 var state
 
-var stats_object
+var stats_object = null
 var anim_speed = {}
 var sprites = {}
 
 var battle
 var start_pos
+var sprite_start_pos
 var attacked
 var used_item
 
@@ -113,6 +115,30 @@ func _physics_process(delta):
 		self.draw_health = stats_object.stats["health"]
 	call(state)
 
+func flash(color, duration = 1):
+	var c = color
+	var not_white = color != Color.white
+	c.a = 0
+	if not_white:
+		sprite.modulate = color
+	shader.set_shader_param("flash", true)
+	shader.set_shader_param("flash_color", c)
+	yield(get_tree().create_timer(0.05),"timeout")
+#	shader.set_shader_param("flash_color", Color(0))
+	var tween = Tween.new()
+	var tweensprite
+	tween.interpolate_property(shader, "shader_param/flash_color",c,Color(0,0,0,0),duration,Tween.TRANS_QUAD,Tween.EASE_OUT)
+	add_child(tween)
+	tween.start()
+	if not_white:
+		tweensprite = Tween.new()
+		tween.interpolate_property(sprite, "modulate",modulate,Color.white,1,Tween.TRANS_QUAD,Tween.EASE_OUT)
+	yield(tween,"tween_completed")
+	shader.set_shader_param("flash", false)
+	tween.queue_free()
+	if not_white:
+		tweensprite.queue_free()
+
 ### STATES ###
 func idle_state():
 	change_anim("idle")
@@ -159,6 +185,8 @@ func attack_state():
 		var foe = ray.get_collider()
 		if foe != null and foe.get_parent().is_in_group("unit"):
 			deal_damage(self, foe.get_parent(), GData.chance(stats_object.stats["critical"]/100), 1)
+			foe.get_parent().flash(Color.white, 0.5)
+			foe.get_parent().state = "hit_state"
 			attacked = true
 	if not anim.is_playing():
 		state = "return_state"
@@ -176,30 +204,52 @@ func return_state():
 	speed = 5
 	position.x = GData.approach(position.x, target_x, speed)
 	if position.x == target_x:
-		state = "idle_state"
+		state = "wait_state"
 		ui.visible = true
-		battle.play = true
+		#battle.play = true
 
 func use_item_state():
 	if is_in_group("enemy"):
-		state = "idle_state"
+		state = "wait_state"
 		return
 	change_anim("use_item")
 	if sprite.frame == 4 and not used_item:
 		PStats.use_item(item_name)
 		used_item = true
 
+func wait_state():
+	change_anim("idle")
+	z_index = 0
+
+func hit_state():
+	change_anim("hit")
+	var frames = (anim.current_animation_position / anim.current_animation_length) * PI
+	sprite.position.x = sprite_start_pos.x - sin(frames) * 32 * sprite.scale.x
+	
+	if (sprite.position.x - sprite_start_pos.x > 24 and stats_object.stats["health"] <= 0):
+		state = "death_state"
+		anim.stop()
+
+func death_state():
+	if sprite.modulate.a > 0:
+		sprite.modulate.a -= 0.02
+	else:
+		destroy()
+
 ### SETS ###
 func set_pivot(pivot):
 	match pivot:
 		"bottom_center":
 			sprite.position = Vector2(0 + sprite_offset.x, 0 - (sprite.texture.get_height()/2) + sprite_offset.y)
+	sprite_start_pos = sprite.position
 
 func set_level(value):
 	level = value
 	ui.draw_level()
 
 func set_draw_health(value):
+#	if draw_health != null and value > draw_health:
+#		flash(Color.green, 0.5)
 	draw_health = value
 	ui.draw_health()
 
@@ -208,7 +258,11 @@ func set_action_meter(value):
 	ui.draw_action()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "use_item":
-		state = "idle_state"
-		battle.play = true
-		used_item = false
+	match anim_name:
+		"use_item":
+			state = "idle_state"
+			battle.play = true
+			used_item = false
+		"hit":
+			state = "wait_state"
+			sprite.position.x = sprite_start_pos.x

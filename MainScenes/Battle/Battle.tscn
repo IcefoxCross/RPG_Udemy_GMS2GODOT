@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://MainScenes/Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://MainScenes/Battle/Background.gd" type="Script" id=2]
@@ -17,8 +17,35 @@
 [ext_resource path="res://icon.png" type="Texture" id=15]
 [ext_resource path="res://UI/BattleUI.tscn" type="PackedScene" id=16]
 
+[sub_resource type="Shader" id=10]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform bool flash : false;
+uniform vec4 flash_color : hint_color;
+
+void fragment() {
+	vec4 sprite = texture(TEXTURE, UV);
+	//mask_color.a = alpha;
+	if (sprite.a > 0.0 && flash == true) {
+		COLOR = sprite + flash_color;
+	}
+	else {
+		COLOR = sprite;
+	}
+	//COLOR = color;
+	//COLOR = texture(TEXTURE, UV);
+	//COLOR.xyz += vec3(1.0,0,0);
+	//COLOR.xyz += color.xyz;
+}"
+
+[sub_resource type="ShaderMaterial" id=18]
+resource_local_to_scene = true
+shader = SubResource( 10 )
+shader_param/flash = false
+shader_param/flash_color = Color( 0, 0, 0, 0 )
+
 [sub_resource type="Animation" id=1]
-resource_name = "approach"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
@@ -46,7 +73,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-resource_name = "attack"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
@@ -74,7 +100,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "hit"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
@@ -102,7 +127,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "idle"
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -131,7 +155,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-resource_name = "ranged"
 length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
@@ -159,7 +182,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-resource_name = "return"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
@@ -189,7 +211,149 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 8, 16 )
 
-[sub_resource type="TileSet" id=8]
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+shader = SubResource( 10 )
+shader_param/flash = false
+shader_param/flash_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="Animation" id=12]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=15]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
+}
+
+[sub_resource type="TileSet" id=17]
 0/name = "icon.png 0"
 0/texture = ExtResource( 15 )
 0/tex_offset = Vector2( 0, 0 )
@@ -272,14 +436,14 @@ script = ExtResource( 12 )
 [node name="Units" type="Node" parent="."]
 
 [node name="EnemyUnit" parent="Units" instance=ExtResource( 13 )]
-editor/display_folded = true
+light_mask = 1
 position = Vector2( 736, 224 )
-sprite_offset = Vector2( 0, 4 )
 unit_name = "spider"
 
 [node name="Sprite" parent="Units/EnemyUnit" index="0"]
-hframes = 3
-frame = 0
+light_mask = 1
+material = SubResource( 18 )
+texture = null
 
 [node name="AnimationPlayer" parent="Units/EnemyUnit" index="1"]
 anims/approach = SubResource( 1 )
@@ -296,8 +460,20 @@ position = Vector2( 8, -16 )
 shape = SubResource( 7 )
 
 [node name="PlayerUnit" parent="Units" instance=ExtResource( 14 )]
-editor/display_folded = true
+light_mask = 1
 position = Vector2( 544, 224 )
+
+[node name="Sprite" parent="Units/PlayerUnit" index="0"]
+light_mask = 1
+material = SubResource( 19 )
+texture = null
+
+[node name="AnimationPlayer" parent="Units/PlayerUnit" index="1"]
+anims/approach = SubResource( 12 )
+anims/attack = SubResource( 13 )
+anims/hit = SubResource( 14 )
+anims/idle = SubResource( 15 )
+anims/ranged = SubResource( 16 )
 
 [node name="Area2D" parent="Units/PlayerUnit" index="4"]
 editor/display_folded = false
@@ -305,7 +481,7 @@ editor/display_folded = false
 [node name="IdleView" type="TileMap" parent="."]
 visible = false
 z_index = 10
-tile_set = SubResource( 8 )
+tile_set = SubResource( 17 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 262173, 0, 0, 262174, 0, 0, 262175, 0, 0, 262176, 0, 0, 262177, 0, 0, 262178, 0, 0, 262179, 0, 0, 262180, 0, 0, 262181, 0, 0, 262182, 0, 0, 262183, 0, 0, 262184, 0, 0, 262185, 0, 0, 262186, 0, 0, 262187, 0, 0, 262188, 0, 0, 262189, 0, 0, 262190, 0, 0, 262191, 0, 0, 262192, 0, 0, 262193, 0, 0, 262194, 0, 0, 327709, 0, 0, 327730, 0, 0, 393245, 0, 0, 393266, 0, 0, 458781, 0, 0, 458802, 0, 0, 524317, 0, 0, 524338, 0, 0, 589853, 0, 0, 589874, 0, 0, 655389, 0, 0, 655410, 0, 0, 720925, 0, 0, 720946, 0, 0, 786461, 0, 0, 786482, 0, 0, 851997, 0, 0, 852018, 0, 0, 917533, 0, 0, 917537, 0, 0, 917538, 0, 0, 917549, 0, 0, 917550, 0, 0, 917554, 0, 0, 983069, 0, 0, 983090, 0, 0, 1048605, 0, 0, 1048626, 0, 0, 1114141, 0, 0, 1114142, 0, 0, 1114143, 0, 0, 1114144, 0, 0, 1114145, 0, 0, 1114146, 0, 0, 1114147, 0, 0, 1114148, 0, 0, 1114149, 0, 0, 1114150, 0, 0, 1114151, 0, 0, 1114152, 0, 0, 1114153, 0, 0, 1114154, 0, 0, 1114155, 0, 0, 1114156, 0, 0, 1114157, 0, 0, 1114158, 0, 0, 1114159, 0, 0, 1114160, 0, 0, 1114161, 0, 0, 1114162, 0, 0 )

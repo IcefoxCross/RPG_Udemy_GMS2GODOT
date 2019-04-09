@@ -3,8 +3,7 @@
 [ext_resource path="res://MainScenes/Battle/Units/BattleUnit.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MainScenes/Battle/Units/PlayerUnit.gd" type="Script" id=2]
 
-[sub_resource type="Animation" id=1]
-resource_name = "use_item"
+[sub_resource type="Animation" id=4]
 length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
@@ -39,5 +38,5 @@ hframes = 9
 frame = 8
 
 [node name="AnimationPlayer" parent="." index="1"]
-anims/use_item = SubResource( 1 )
+anims/use_item = SubResource( 4 )
 

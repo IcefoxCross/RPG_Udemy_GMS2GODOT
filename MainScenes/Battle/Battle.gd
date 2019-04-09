@@ -6,6 +6,7 @@ const MSG = preload("res://UI/Message.tscn")
 
 onready var camera = $BattleCamera
 onready var enemy = $Units/EnemyUnit
+onready var player = $Units/PlayerUnit
 
 var play = true
 
@@ -18,6 +19,13 @@ func _ready():
 	fade.fade(0)
 	camera.start()
 	enemy.connect("battle_won", self, "end_battle")
+
+func _process(delta):
+	if find_node("PlayerUnit") and find_node("EnemyUnit"):
+		if player.state == "wait_state" and enemy.state == "wait_state":
+			player.state = "idle_state"
+			enemy.state = "idle_state"
+			play = true
 
 func end_battle():
 	play = false
