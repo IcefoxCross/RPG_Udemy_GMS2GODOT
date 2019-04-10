@@ -10,7 +10,7 @@ var draw_health
 
 func _ready():
 	level = 1
-	_class = GData.classes["elizabeth"]
+	_class = GData.classes["elizabeth"].duplicate()
 	
 	items = {}
 	actions = []
@@ -26,6 +26,15 @@ func _process(delta):
 		get_tree().change_scene("res://MainScenes/GameOver.tscn")
 	# Level up
 	if stats["experience"] >= stats["maxexperience"]:
+		if not get_tree().current_scene.has_node("LevelUp"):
+			var levelup = load("res://UI/LevelUp/LevelUp.tscn").instance()
+			var camera = get_tree().current_scene.find_node("BattleCamera")
+			levelup.position = camera.get_camera_screen_center()
+			get_tree().current_scene.add_child(levelup)
+			if get_tree().current_scene.has_node("FadeTransition"):
+				var fade = get_tree().current_scene.get_node("FadeTransition")
+				fade.queue_free()
+		
 		level += 1
 		stats["experience"] = stats["experience"] - stats["maxexperience"]
 		stats["maxexperience"] = level * 10

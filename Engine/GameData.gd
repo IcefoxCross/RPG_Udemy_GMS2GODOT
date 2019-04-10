@@ -79,7 +79,7 @@ func get_class_data():
 			"defense": 4,
 			"speed": 10,
 			"critical": 5,
-			"experience": 10,
+			"experience": 100,
 			"actions": ["attack", "defend"]
 		}
 	}
@@ -104,6 +104,5 @@ func get_item_data():
 func heal_effect(args):
 	var amount = args[0]
 	PStats.stats["health"] = min(PStats.stats["health"] + amount, PStats.stats["maxhealth"])
-	print(PStats.stats["health"])
 	if get_tree().current_scene.name == "Battle":
 		get_tree().current_scene.find_node("PlayerUnit").flash(Color.green)

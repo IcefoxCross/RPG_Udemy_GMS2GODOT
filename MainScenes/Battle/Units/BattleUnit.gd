@@ -97,6 +97,8 @@ func deal_damage(atk, def, critical, modifier):
 
 func destroy():
 	if is_in_group("enemy"):
+		# Add EXP
+		PStats.stats["experience"] += min(1+level/2, 1) * stats_object.stats["experience"]
 		queue_free()
 		emit_signal("battle_won")
 
@@ -248,8 +250,6 @@ func set_level(value):
 	ui.draw_level()
 
 func set_draw_health(value):
-#	if draw_health != null and value > draw_health:
-#		flash(Color.green, 0.5)
 	draw_health = value
 	ui.draw_health()
 
