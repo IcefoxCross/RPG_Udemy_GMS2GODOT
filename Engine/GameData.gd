@@ -85,6 +85,24 @@ func get_class_data():
 	}
 	return to_json(classes)
 
+#### ACTIONS ####
+var actions = parse_json(get_action_data())
+
+func get_action_data():
+	var actions = {
+		"attack": {
+			"name": "Attack",
+			"action": "approach_state",
+			"info": "A basic melee\nattack."
+		},
+		"defend": {
+			"name": "Defend",
+			"action": "action_defend",
+			"info": "Reduces damage taken\nby half and sets\naction bar to half."
+		}
+	}
+	return to_json(actions)
+
 #### ITEMS ####
 var items = parse_json(get_item_data())
 

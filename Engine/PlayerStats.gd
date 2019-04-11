@@ -6,6 +6,8 @@ var items
 var actions
 var stats
 
+var defend = false
+
 var draw_health
 
 func _ready():
@@ -14,6 +16,8 @@ func _ready():
 	
 	items = {}
 	actions = []
+	actions.append("attack")
+	actions.append("defend")
 	stats = get_stats_from_class("elizabeth")
 	pickup_item("potion",3)
 	

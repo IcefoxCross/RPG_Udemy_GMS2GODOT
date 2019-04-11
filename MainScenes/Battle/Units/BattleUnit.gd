@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Unit
 
+const SHIELD = preload("res://UI/Effects/Shield.tscn")
+
 export (Vector2) var sprite_offset = Vector2(0,0)
 
 onready var sprite = $Sprite
@@ -33,6 +35,7 @@ var start_pos
 var sprite_start_pos
 var attacked
 var used_item
+var defend setget set_defend
 
 func _ready():
 	max_action_meter = 100
@@ -52,6 +55,8 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	# Enemy stats
 	if is_enemy:
 		stats = PStats.get_stats_from_class(_name)
+		actions = create_action_list()
+		self.defend = false
 	self.level = _level
 	self.draw_health = stats_object.stats["health"]
 	sprite.scale.x =  -1 if is_enemy else 1
@@ -78,6 +83,13 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	set_physics_process(true)
 
 ### ACTIONS ###
+
+func action_defend():
+	state = "wait_state"
+	stats_object.defend = true
+	action_meter = max_action_meter / 2
+	battle.play = true
+
 func deal_damage(atk, def, critical, modifier):
 	var attacker = atk.stats_object
 	var defender = def.stats_object
@@ -88,7 +100,7 @@ func deal_damage(atk, def, critical, modifier):
 	
 	if attacker != null and defender != null:
 		var damage = (attack+(attacker.level*3)+(1-defense*.05))*.5
-		var total_damage = (damage+(critical*damage*(attacker.stats["critical"]/100)))
+		var total_damage = (damage+(critical*damage*(attacker.stats["critical"]/100))) / (int(defender.defend)+1)
 		total_damage *= modifier
 		
 		# Deal damage
@@ -141,6 +153,9 @@ func flash(color, duration = 1):
 	if not_white:
 		tweensprite.queue_free()
 
+func create_action_list():
+	return stats["actions"]
+
 ### STATES ###
 func idle_state():
 	change_anim("idle")
@@ -154,16 +169,24 @@ func idle_state():
 			state = "action_state"
 			battle.play = false
 			action_meter = 0
+			stats_object.defend = false
 
 func action_state():
 	change_anim("idle")
 	z_index = 1
 	
+	## Enemy AI
 	if self.is_in_group("enemy"):
-		state = "approach_state"
-	
-#	if Input.is_action_just_pressed("action"):
-#		state = "approach_state"
+		if stats["health"] == draw_health:
+			var action = "attack"
+			var player = get_tree().current_scene.find_node("PlayerUnit",true,false)
+			if player and player.action_meter > 60 and GData.chance(.8):
+				action = "defend"
+			if GData.chance(.1): action = "defend"
+			if action == "defend":
+				call(GData.actions[action].action)
+			else:
+				state = GData.actions[action].action
 
 func approach_state():
 	ui.visible = false
@@ -256,6 +279,20 @@ func set_draw_health(value):
 func set_action_meter(value):
 	action_meter = value
 	ui.draw_action()
+
+func set_defend(value):
+	defend = value
+	if defend:
+		var shield = SHIELD.instance()
+		if is_in_group("enemy"):
+			shield.position.x = -32
+		else:
+			shield.position.x = 16
+		shield.scale.x = sprite.scale.x
+		add_child(shield)
+	else:
+		if has_node("Shield"):
+			find_node("Shield",true,false).queue_free()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:

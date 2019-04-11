@@ -434,9 +434,9 @@ smoothing_enabled = false
 script = ExtResource( 12 )
 
 [node name="Units" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="EnemyUnit" parent="Units" instance=ExtResource( 13 )]
+editor/display_folded = true
 light_mask = 1
 position = Vector2( 736, 224 )
 unit_name = "spider"
