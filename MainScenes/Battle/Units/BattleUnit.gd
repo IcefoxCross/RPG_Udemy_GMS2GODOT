@@ -281,8 +281,8 @@ func set_action_meter(value):
 	ui.draw_action()
 
 func set_defend(value):
-	defend = value
-	if defend:
+	stats_object.defend = value
+	if stats_object.defend:
 		var shield = SHIELD.instance()
 		if is_in_group("enemy"):
 			shield.position.x = -32

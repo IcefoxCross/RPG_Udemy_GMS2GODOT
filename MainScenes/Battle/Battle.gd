@@ -8,7 +8,7 @@ onready var camera = $BattleCamera
 onready var enemy = $Units/EnemyUnit
 onready var player = $Units/PlayerUnit
 
-var play = true
+var play
 
 func _ready():
 	play = true

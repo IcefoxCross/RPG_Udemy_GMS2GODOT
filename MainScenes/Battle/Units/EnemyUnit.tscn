@@ -1,10 +1,41 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://MainScenes/Battle/Units/BattleUnit.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MainScenes/Battle/Units/EnemyUnit.gd" type="Script" id=2]
 
-[node name="EnemyUnit" groups=[
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform bool flash : false;
+uniform vec4 flash_color : hint_color;
+
+void fragment() {
+	vec4 sprite = texture(TEXTURE, UV);
+	//mask_color.a = alpha;
+	if (sprite.a > 0.0 && flash == true) {
+		COLOR = sprite + flash_color;
+	}
+	else {
+		COLOR = sprite;
+	}
+	//COLOR = color;
+	//COLOR = texture(TEXTURE, UV);
+	//COLOR.xyz += vec3(1.0,0,0);
+	//COLOR.xyz += color.xyz;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/flash = false
+shader_param/flash_color = Color( 0, 0, 0, 0 )
+
+[node name="EnemyUnit" index="0" groups=[
 "enemy",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource( 2 )
 

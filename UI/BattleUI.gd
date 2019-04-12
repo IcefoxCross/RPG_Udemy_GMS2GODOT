@@ -1,6 +1,7 @@
 extends Control
 
 const ITEMS_MENU = preload("res://UI/Menus/ItemListMenu.tscn")
+const ACTIONS_MENU = preload("res://UI/Menus/ActionListMenu.tscn")
 
 onready var frame = $Frame
 onready var options = $Frame/HBoxContainer
@@ -36,8 +37,15 @@ func _on_Button_Pressed(option):
 	if Player and enabled:
 		match option.name:
 			"ActionIcon":
-				Player.state = "approach_state"
-				option.release_focus()
+				enabled = false
+				var menu = ACTIONS_MENU.instance()
+				menu.rect_position.x = frame.rect_global_position.x + 13
+				menu.rect_position.y = target_y - frame.rect_size.y * 2
+				menu.is_root = false
+				menu.previous = self
+				var focused = options.get_focus_owner()
+				focused.release_focus()
+				add_child(menu)
 			"ItemIcon":
 				enabled = false
 				if PStats.items.size() > 0:
