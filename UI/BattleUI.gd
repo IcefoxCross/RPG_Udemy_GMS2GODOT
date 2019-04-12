@@ -40,7 +40,7 @@ func _on_Button_Pressed(option):
 				enabled = false
 				var menu = ACTIONS_MENU.instance()
 				menu.rect_position.x = frame.rect_global_position.x + 13
-				menu.rect_position.y = target_y - frame.rect_size.y * 2
+				menu.rect_position.y = target_y - frame.rect_size.y - 8
 				menu.is_root = false
 				menu.previous = self
 				var focused = options.get_focus_owner()

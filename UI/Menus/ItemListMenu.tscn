@@ -5,15 +5,15 @@
 [ext_resource path="res://UI/Menus/ListMenuTheme.tres" type="Theme" id=3]
 [ext_resource path="res://UI/Assets/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="StyleBoxEmpty" id=2032]
+[sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxEmpty" id=2033]
+[sub_resource type="StyleBoxEmpty" id=2]
 
-[sub_resource type="DynamicFont" id=2034]
+[sub_resource type="DynamicFont" id=3]
 size = 9
 font_data = ExtResource( 4 )
 
-[node name="ItemListMenu" index="0" instance=ExtResource( 1 )]
+[node name="ItemListMenu" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="NinePatchRect" parent="." index="0"]
@@ -38,8 +38,8 @@ margin_bottom = 32.0
 focus_neighbour_bottom = NodePath(".")
 mouse_filter = 2
 theme = ExtResource( 3 )
-custom_styles/bg_focus = SubResource( 2032 )
-custom_styles/bg = SubResource( 2033 )
-custom_fonts/font = SubResource( 2034 )
+custom_styles/bg_focus = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 
 [connection signal="item_activated" from="NinePatchRect/MarginContainer/ItemList" to="." method="_on_ItemList_item_activated"]

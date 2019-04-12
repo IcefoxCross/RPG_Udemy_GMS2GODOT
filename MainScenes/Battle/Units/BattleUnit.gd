@@ -86,7 +86,7 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 
 func action_defend():
 	state = "wait_state"
-	stats_object.defend = true
+	self.defend = true
 	action_meter = max_action_meter / 2
 	battle.play = true
 
@@ -169,7 +169,7 @@ func idle_state():
 			state = "action_state"
 			battle.play = false
 			action_meter = 0
-			stats_object.defend = false
+			self.defend = false
 
 func action_state():
 	change_anim("idle")
@@ -281,8 +281,11 @@ func set_action_meter(value):
 	ui.draw_action()
 
 func set_defend(value):
-	stats_object.defend = value
+	defend = value
+	if not is_in_group("enemy"):
+		PStats.defend = value
 	if stats_object.defend:
+		print("defend")
 		var shield = SHIELD.instance()
 		if is_in_group("enemy"):
 			shield.position.x = -32
