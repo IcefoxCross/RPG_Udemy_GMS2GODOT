@@ -99,6 +99,11 @@ func get_action_data():
 			"name": "Defend",
 			"action": "action_defend",
 			"info": "Reduces damage taken\nby half and sets\naction bar to half."
+		},
+		"fire spell": {
+			"name": "Fire Spell",
+			"action": "fire_spell_state",
+			"info": "Has a lower damage\nrate, but a higher\ncritical chance."
 		}
 	}
 	return to_json(actions)
@@ -124,3 +129,21 @@ func heal_effect(args):
 	PStats.stats["health"] = min(PStats.stats["health"] + amount, PStats.stats["maxhealth"])
 	if get_tree().current_scene.name == "Battle":
 		get_tree().current_scene.find_node("PlayerUnit").flash(Color.green)
+
+### SPRITES ###
+var sprites = parse_json(get_sprite_data())
+
+func get_sprite_data():
+	var sprites = {
+		"res://MainScenes/Battle/Units/Assets/elizabeth/s_battle_elizabeth_ranged.png": {
+			"xoffset": 40,
+			"yoffset": 8,
+			"hitframe": 4
+		},
+		"res://MainScenes/Battle/Units/Assets/gargoyle/s_battle_gargoyle_ranged.png": {
+			"xoffset": 16,
+			"yoffset": 0,
+			"hitframe": 11
+		}
+	}
+	return to_json(sprites)

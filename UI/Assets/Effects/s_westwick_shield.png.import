@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/s_shield_0.png-fe9f60bd56fd477ed97d1408dada0c58.stex"
+path="res://.import/s_westwick_shield.png-c74ea513c027db45759050084695ae3a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Assets/Effects/s_shield_0.png"
-dest_files=[ "res://.import/s_shield_0.png-fe9f60bd56fd477ed97d1408dada0c58.stex" ]
+source_file="res://UI/Assets/Effects/s_westwick_shield.png"
+dest_files=[ "res://.import/s_westwick_shield.png-c74ea513c027db45759050084695ae3a.stex" ]
 
 [params]
 

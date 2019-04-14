@@ -233,6 +233,26 @@ func return_state():
 		ui.visible = true
 		#battle.play = true
 
+func ranged_attack_state(xoffset, yoffset, effect, effect_frame):
+	change_anim("ranged")
+	
+	if sprite.frame == effect_frame and not attacked:
+		attacked = true
+		var _effect = load(effect).instance()
+		_effect.position = Vector2(xoffset,yoffset)
+		_effect.scale.x = sprite.scale.x
+		_effect.creator = self
+		_effect.connect("finished", self, "_on_Effect_Finished")
+		if not is_in_group("enemy"):
+			_effect.target = get_tree().current_scene.find_node("EnemyUnit",true,false)
+		else:
+			_effect.target = get_tree().current_scene.find_node("PlayerUnit",true,false)
+		add_child(_effect)
+
+func fire_spell_state():
+	var sprite_data = GData.sprites[sprites["ranged"].get_path()]
+	ranged_attack_state(sprite_data["xoffset"],sprite_data["yoffset"],"res://MainScenes/Battle/Effects/FireSpell.tscn", 1)
+
 func use_item_state():
 	if is_in_group("enemy"):
 		state = "wait_state"
@@ -285,7 +305,6 @@ func set_defend(value):
 	if not is_in_group("enemy"):
 		PStats.defend = value
 	if stats_object.defend:
-		print("defend")
 		var shield = SHIELD.instance()
 		if is_in_group("enemy"):
 			shield.position.x = -32
@@ -306,3 +325,9 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"hit":
 			state = "wait_state"
 			sprite.position.x = sprite_start_pos.x
+		"ranged":
+			#state = "wait_state"
+			attacked = false
+
+func _on_Effect_Finished():
+	state = "wait_state"

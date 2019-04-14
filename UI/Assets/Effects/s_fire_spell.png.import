@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/s_battle_elizabeth_ranged.png-2aa641b5aa964af0cc64efaf2506ea71.stex"
+path="res://.import/s_fire_spell.png-996c78d6eea34e7be0f0759dee706ea1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MainScenes/Battle/Units/Assets/elizabeth/s_battle_elizabeth_ranged.png"
-dest_files=[ "res://.import/s_battle_elizabeth_ranged.png-2aa641b5aa964af0cc64efaf2506ea71.stex" ]
+source_file="res://UI/Assets/Effects/s_fire_spell.png"
+dest_files=[ "res://.import/s_fire_spell.png-996c78d6eea34e7be0f0759dee706ea1.stex" ]
 
 [params]
 

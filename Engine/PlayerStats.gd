@@ -18,6 +18,7 @@ func _ready():
 	actions = []
 	actions.append("attack")
 	actions.append("defend")
+	actions.append("fire spell")
 	stats = get_stats_from_class("elizabeth")
 	pickup_item("potion",3)
 	

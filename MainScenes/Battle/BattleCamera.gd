@@ -26,7 +26,8 @@ func camera_approach(x,y,width,height,speed,zoom_speed):
 
 func camera_screenshake(amount, _duration):
 	amplitude = amount
-	duration = _duration
+	self.duration = _duration
+	self.shake = true
 
 func intro_state():
 	target.x = Game.room_width *3/4
