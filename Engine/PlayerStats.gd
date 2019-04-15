@@ -19,6 +19,7 @@ func _ready():
 	actions.append("attack")
 	actions.append("defend")
 	actions.append("fire spell")
+	actions.append("sonar spell")
 	stats = get_stats_from_class("elizabeth")
 	pickup_item("potion",3)
 	

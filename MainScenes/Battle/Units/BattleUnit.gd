@@ -178,9 +178,9 @@ func action_state():
 	## Enemy AI
 	if self.is_in_group("enemy"):
 		if stats["health"] == draw_health:
-			var action = "attack"
+			var action = actions[0]
 			var player = get_tree().current_scene.find_node("PlayerUnit",true,false)
-			if player and player.action_meter > 60 and GData.chance(.8):
+			if player and player.action_meter > 60 and GData.chance(.3):
 				action = "defend"
 			if GData.chance(.1): action = "defend"
 			if action == "defend":
@@ -252,6 +252,10 @@ func ranged_attack_state(xoffset, yoffset, effect, effect_frame):
 func fire_spell_state():
 	var sprite_data = GData.sprites[sprites["ranged"].get_path()]
 	ranged_attack_state(sprite_data["xoffset"],sprite_data["yoffset"],"res://MainScenes/Battle/Effects/FireSpell.tscn", 1)
+
+func sonar_spell_state():
+	var sprite_data = GData.sprites[sprites["ranged"].get_path()]
+	ranged_attack_state(sprite_data["xoffset"],sprite_data["yoffset"],"res://MainScenes/Battle/Effects/SonarSpell.tscn", sprite_data["hitframe"])
 
 func use_item_state():
 	if is_in_group("enemy"):

@@ -79,8 +79,18 @@ func get_class_data():
 			"defense": 4,
 			"speed": 10,
 			"critical": 5,
-			"experience": 100,
+			"experience": 10,
 			"actions": ["attack", "defend"]
+		},
+		"gargoyle": {
+			"name": "Gargoyle",
+			"health": 10,
+			"attack": 4,
+			"defense": 8,
+			"speed": 4,
+			"critical": 10,
+			"experience": 100,
+			"actions": ["sonar spell", "defend"]
 		}
 	}
 	return to_json(classes)
@@ -104,6 +114,11 @@ func get_action_data():
 			"name": "Fire Spell",
 			"action": "fire_spell_state",
 			"info": "Has a lower damage\nrate, but a higher\ncritical chance."
+		},
+		"sonar spell": {
+			"name": "Sonar Spell",
+			"action": "sonar_spell_state",
+			"info": "A basic ranged\nattack."
 		}
 	}
 	return to_json(actions)
@@ -141,7 +156,7 @@ func get_sprite_data():
 			"hitframe": 4
 		},
 		"res://MainScenes/Battle/Units/Assets/gargoyle/s_battle_gargoyle_ranged.png": {
-			"xoffset": 16,
+			"xoffset": -40,
 			"yoffset": 0,
 			"hitframe": 11
 		}
