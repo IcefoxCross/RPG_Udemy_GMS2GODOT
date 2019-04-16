@@ -22,7 +22,8 @@ func _process(delta):
 func camera_approach(x,y,width,height,speed,zoom_speed):
 	position.x = lerp(position.x, x,speed)
 	position.y = lerp(position.y, y,speed)
-	zoom = lerp(zoom,Vector2(width/Game.room_width,height/Game.room_height),zoom_speed)
+	#zoom = lerp(zoom,Vector2(width/Game.room_width,height/Game.room_height),zoom_speed)
+	zoom = lerp(zoom,Vector2(width,height),zoom_speed)
 
 func camera_screenshake(amount, _duration):
 	amplitude = amount
@@ -42,7 +43,11 @@ func intro_state():
 func idle_state():
 	target.x = Game.room_width *3/4
 	target.y = Game.room_height / 2
-	camera_approach(target.x,target.y,Game.room_width,Game.room_height,speed/2,speed)
+	#camera_approach(target.x,target.y,Game.room_width,Game.room_height,speed/2,speed/2)
+	camera_approach(target.x,target.y,1,1,speed/2,speed/2)
 
 func focus_state():
-	camera_approach(target.x, Game.room_height/2, 288, 162, speed/2, speed/2)
+	camera_approach(target.x, Game.room_height/2, .95, .95, speed/2, speed / 1.5)
+
+func _on_Timer_timeout():
+	self.shake = false

@@ -428,7 +428,6 @@ texture = ExtResource( 10 )
 centered = false
 
 [node name="BattleCamera" parent="." instance=ExtResource( 11 )]
-editor/display_folded = true
 anchor_mode = 0
 smoothing_enabled = false
 script = ExtResource( 12 )

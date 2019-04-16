@@ -9,14 +9,15 @@ export (bool) var shake = false setget set_shake
 
 func _ready():
 	randomize()
-	set_process(false)
+	#set_process(false)
 	self.duration = duration
 
 func _process(delta):
-	var damping = ease(timer.time_left / timer.wait_time, DAMP_EASING)
-	offset = Vector2(
-			rand_range(amplitude, -amplitude) * damping,
-			rand_range(amplitude, -amplitude) * damping)
+	if shake:
+		var damping = ease(timer.time_left / timer.wait_time, DAMP_EASING)
+		offset = Vector2(
+				rand_range(amplitude, -amplitude) * damping,
+				rand_range(amplitude, -amplitude) * damping)
 
 func set_duration(value):
 	duration = value
@@ -24,7 +25,7 @@ func set_duration(value):
 
 func set_shake(value):
 	shake = value
-	set_process(shake)
+	#set_process(shake)
 	offset = Vector2()
 	if shake:
 		timer.start()

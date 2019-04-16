@@ -35,6 +35,7 @@ var start_pos
 var sprite_start_pos
 var attacked
 var used_item
+var zoomed = false
 var defend setget set_defend
 
 func _ready():
@@ -198,6 +199,9 @@ func approach_state():
 	# Anim speed
 	var frames = GData.get_frames(target_x, start_pos.x, speed)
 	anim.playback_speed = GData.get_image_speed_from_frames(frames, sprite_frames)
+	# Set camera state
+	battle.camera.target.x = target_x - 150 * sprite.scale.x
+	battle.camera.state = "focus_state"
 	# Move to target
 	position.x = GData.approach(position.x, target_x, speed)
 	if position.x == target_x:
@@ -212,12 +216,15 @@ func attack_state():
 			deal_damage(self, foe.get_parent(), GData.chance(stats_object.stats["critical"]/100), 1)
 			foe.get_parent().flash(Color.white, 0.5)
 			foe.get_parent().state = "hit_state"
+			battle.camera.camera_screenshake(4,.2)
 			attacked = true
 	if not anim.is_playing():
 		state = "return_state"
 		attacked = false
 
 func return_state():
+	# Set camera state
+	battle.camera.state = "idle_state"
 	var target_x = start_pos.x
 	change_anim("return")
 	var sprite_frames = sprite.vframes * sprite.hframes
@@ -235,6 +242,13 @@ func return_state():
 
 func ranged_attack_state(xoffset, yoffset, effect, effect_frame):
 	change_anim("ranged")
+	
+	var target_x = start_pos.x + GData.BATTLE_SPACE * sprite.scale.x
+	var sprite_data = GData.sprites[sprites["ranged"].get_path()]
+	if sprite.frame == sprite_data["hitframe"] and not zoomed:
+		zoomed = true
+		battle.camera.target.x = target_x - 150 * scale.x
+		battle.camera.state = "focus_state"
 	
 	if sprite.frame == effect_frame and not attacked:
 		attacked = true
@@ -262,6 +276,9 @@ func use_item_state():
 		state = "wait_state"
 		return
 	change_anim("use_item")
+	if anim.current_animation_position == 0:
+		battle.camera.target.x = start_pos.x - 150 * sprite.scale.x
+		battle.camera.state = "focus_state"
 	if sprite.frame == 4 and not used_item:
 		PStats.use_item(item_name)
 		used_item = true
@@ -326,12 +343,15 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			state = "idle_state"
 			battle.play = true
 			used_item = false
+			battle.camera.state = "idle_state"
 		"hit":
 			state = "wait_state"
+			battle.camera.state = "idle_state"
 			sprite.position.x = sprite_start_pos.x
 		"ranged":
 			#state = "wait_state"
 			attacked = false
+			zoomed = false
 
 func _on_Effect_Finished():
 	state = "wait_state"
