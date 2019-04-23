@@ -13,10 +13,11 @@ script = ExtResource( 1 )
 [node name="Common" type="Node" parent="."]
 
 [node name="Elizabeth" parent="Common" instance=ExtResource( 2 )]
-position = Vector2( 208, 104 )
+position = Vector2( 128, 128 )
 move_speed = 75.0
 
 [node name="GUI" type="CanvasLayer" parent="Common"]
+editor/display_folded = true
 
 [node name="Control" type="Control" parent="Common/GUI"]
 editor/display_folded = true
@@ -39,4 +40,6 @@ __meta__ = {
 
 [node name="RandomEncounters" parent="Common" instance=ExtResource( 4 )]
 on = false
+
+[node name="Events" type="Node" parent="Common"]
 

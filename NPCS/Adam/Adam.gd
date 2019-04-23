@@ -1,4 +1,4 @@
-extends "res://UI/Speaker.gd"
+extends "res://NPCS/Character.gd"
 
 func _ready():
 	._ready()

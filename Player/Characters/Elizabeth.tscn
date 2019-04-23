@@ -235,6 +235,7 @@ tracks/1/keys = {
 }
 
 [node name="Elizabeth" type="KinematicBody2D" groups=[
+"character",
 "player",
 ]]
 script = ExtResource( 1 )

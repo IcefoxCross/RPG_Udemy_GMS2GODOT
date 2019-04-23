@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Cutscenes/Cutscene.gd" type="Script" id=1]
+
+[node name="Cutscene" type="Node"]
+script = ExtResource( 1 )
+
+[node name="WaitTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]

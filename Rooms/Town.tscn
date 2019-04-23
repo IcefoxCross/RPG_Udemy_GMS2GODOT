@@ -603,7 +603,7 @@ position = Vector2( 8, 32 )
 [node name="NPCS" type="Node" parent="." index="7"]
 
 [node name="Adam" parent="NPCS" index="0" instance=ExtResource( 13 )]
-position = Vector2( 248, 88 )
+position = Vector2( 272, 80 )
 
 
 [editable path="Doors/TownWestMeadow"]

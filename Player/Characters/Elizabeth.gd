@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends "res://NPCS/Character.gd"
 
 export (float) var move_speed = 100.0
 
@@ -7,12 +7,10 @@ const LASTE = preload("res://MainScenes/Battle/LastEncounter.tscn")
 signal encounter
 signal menu_call
 
-onready var anim = $AnimationPlayer
 onready var camera = $Camera2D
 onready var ray = $RayCast2D
 
 var motion = Vector2()
-var spritedir = "down"
 var state = "move_state"
 var last_encounter
 
@@ -47,7 +45,7 @@ func stop():
 	set_process_input(false)
 
 func _physics_process(delta):
-	z_index = max(0,position.y)
+	._physics_process(delta)
 	motion = Vector2()
 	call(state)
 	if motion != GData.direction["center"]:
@@ -90,6 +88,9 @@ func talking_state():
 	if not get_tree().has_group("dialog"):
 		state = "move_state"
 
+func cutscene_state():
+	motion = spritedir_set()
+
 ### FUNCS ###
 func get_input():
 	motion.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -112,8 +113,9 @@ func spritedir_loop():
 
 func anim_switch(animation):
 	var new_anim = str(animation,spritedir)
-	if anim.current_animation != new_anim:
-		anim.play(new_anim)
+	if anim.has_animation(new_anim):
+		if anim.current_animation != new_anim:
+			anim.play(new_anim)
 
 func interactable():
 	var obj = ray.get_collider()

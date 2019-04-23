@@ -21,5 +21,4 @@ func fade(alpha):
 	yield(tween,"tween_completed")
 	if rect.modulate.a == 0:
 		queue_free()
-	else:
-		emit_signal("fade_done")
+	emit_signal("fade_done")

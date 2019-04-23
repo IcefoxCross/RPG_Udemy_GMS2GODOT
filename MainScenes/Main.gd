@@ -3,6 +3,9 @@ extends Node
 onready var player = $Common/Elizabeth
 onready var gui = $Common/GUI
 onready var randenc = $Common/RandomEncounters
+onready var events = $Common/Events
+
+onready var camera = player.camera
 
 const FADE = preload("res://UI/FadeTransition.tscn")
 const BATTLE = preload("res://UI/BattleTransition.tscn")
@@ -25,6 +28,11 @@ func _ready():
 	fade.fade(0)
 	GData.pause_enabled = true
 	yield(fade, "fade_done")
+	if events and events.get_child_count() > 0:
+		for event in events.get_children():
+			event.interact()
+			yield(event, "finished")
+			#queue_free()
 
 func encounter():
 	if player == null or randenc == null:

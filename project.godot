@@ -9,13 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "MapEvent",
+"language": "GDScript",
+"path": "res://Events/MapEvent.gd"
+}, {
+"base": "MapEvent",
+"class": "MoveEvent",
+"language": "GDScript",
+"path": "res://Events/MoveEvent.gd"
+}, {
 "base": "Node2D",
 "class": "Unit",
 "language": "GDScript",
 "path": "res://MainScenes/Battle/Units/BattleUnit.gd"
+}, {
+"base": "MapEvent",
+"class": "WaitEvent",
+"language": "GDScript",
+"path": "res://Events/WaitEvent.gd"
 } ]
 _global_script_class_icons={
-"Unit": ""
+"MapEvent": "",
+"MoveEvent": "",
+"Unit": "",
+"WaitEvent": ""
 }
 
 [application]

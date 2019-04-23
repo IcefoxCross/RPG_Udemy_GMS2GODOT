@@ -36,7 +36,7 @@ func get_image_speed_from_frames(frames, image_number):
 var room_scene = null
 var last_room = {
 	"room" : "res://Rooms/Town.tscn",
-	"x": 208,
+	"x": 128,
 	"y": 104,
 	"dir": "right"
 }

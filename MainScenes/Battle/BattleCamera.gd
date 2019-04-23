@@ -1,7 +1,6 @@
 extends "res://Player/Camera2D.gd"
 
 var speed
-var state
 var target = Vector2()
 
 func _ready():
@@ -18,12 +17,6 @@ func start():
 func _process(delta):
 	._process(delta)
 	call(state)
-
-func camera_approach(x,y,width,height,speed,zoom_speed):
-	position.x = lerp(position.x, x,speed)
-	position.y = lerp(position.y, y,speed)
-	#zoom = lerp(zoom,Vector2(width/Game.room_width,height/Game.room_height),zoom_speed)
-	zoom = lerp(zoom,Vector2(width,height),zoom_speed)
 
 func camera_screenshake(amount, _duration):
 	amplitude = amount
