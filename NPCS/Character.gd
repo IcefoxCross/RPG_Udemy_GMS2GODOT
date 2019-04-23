@@ -3,6 +3,8 @@ extends "res://UI/Speaker.gd"
 onready var sprite = $Sprite
 onready var anim = $AnimationPlayer
 
+export (float) var move_speed = 100.0
+
 var target = null
 var spritedir = "down"
 
@@ -19,6 +21,7 @@ func anim_switch(animation):
 			anim.play(new_anim)
 
 func spritedir_set():
+	if target == null: return
 	var dir = (target - position).normalized().round()
 	if dir.x == 1:	spritedir = "right"
 	if dir.x == -1:	spritedir = "left"

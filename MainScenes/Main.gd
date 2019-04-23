@@ -3,7 +3,6 @@ extends Node
 onready var player = $Common/Elizabeth
 onready var gui = $Common/GUI
 onready var randenc = $Common/RandomEncounters
-onready var events = $Common/Events
 
 onready var camera = player.camera
 
@@ -28,6 +27,7 @@ func _ready():
 	fade.fade(0)
 	GData.pause_enabled = true
 	yield(fade, "fade_done")
+	var events = current_room.find_node("Events")
 	if events and events.get_child_count() > 0:
 		for event in events.get_children():
 			event.interact()

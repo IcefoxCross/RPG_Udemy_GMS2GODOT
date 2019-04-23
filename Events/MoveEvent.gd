@@ -6,6 +6,7 @@ export (String) var character
 
 export (Vector2) var target
 export (bool) var relative = true
+export (bool) var follow = true
 export (float) var wait_time = 0.0
 
 var _character
@@ -22,17 +23,19 @@ func _physics_process(delta):
 		yield(get_tree().create_timer(wait_time), "timeout")
 		player.state = "move_state"
 		emit_signal("finished")
+		get_tree().current_scene.camera.follow()
 
 func interact():
 	if character == null:
-		_character = self
+		_character = null
 	else:
 		_character = get_tree().current_scene.find_node(character, true, false)
 	if not _character:
 		emit_signal("finished")
 		return
 	player.state = "cutscene_state"
-	get_tree().current_scene.camera.follow(_character)
+	if follow:
+		get_tree().current_scene.camera.follow(_character)
 	if relative:
 		_character.target = Vector2(_character.position.x + target.x, _character.position.y + target.y)
 	else:

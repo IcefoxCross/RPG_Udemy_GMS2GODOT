@@ -25,7 +25,7 @@ func _process(delta):
 				rand_range(amplitude, -amplitude) * damping,
 				rand_range(amplitude, -amplitude) * damping)
 
-func follow(target_node):
+func follow(target_node=null):
 	if target_node == null:
 		target = get_parent()
 	else:

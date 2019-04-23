@@ -1,7 +1,5 @@
 extends "res://NPCS/Character.gd"
 
-export (float) var move_speed = 100.0
-
 const LASTE = preload("res://MainScenes/Battle/LastEncounter.tscn")
 
 signal encounter
