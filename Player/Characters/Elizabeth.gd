@@ -13,6 +13,7 @@ var state = "move_state"
 var last_encounter
 
 func _ready():
+	portrait = load("res://UI/Assets/Dialog/s_elizabeth_portrait_0.png")
 	last_encounter = null
 	set_physics_process(false)
 	set_process_input(false)
@@ -41,6 +42,10 @@ func start(pos, dir = "down"):
 func stop():
 	set_physics_process(false)
 	set_process_input(false)
+
+func resume():
+	set_physics_process(true)
+	set_process_input(true)
 
 func _physics_process(delta):
 	._physics_process(delta)
@@ -80,10 +85,15 @@ func move_state():
 
 func wait_state():
 	stop()
+	
+func resume_state():
+	set_physics_process(false)
+	set_process_input(false)
+	state = "move_state"
 
 func talking_state():
 	anim_switch("idle")
-	if not get_tree().has_group("dialog"):
+	if not get_tree().has_group("dialog") and not get_tree().has_group("message"):
 		state = "move_state"
 
 func cutscene_state():

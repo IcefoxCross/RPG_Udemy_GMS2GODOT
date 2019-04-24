@@ -2,7 +2,8 @@ extends MapEvent
 
 class_name MoveEvent
 
-export (String) var character
+export (String) var character_name
+export (NodePath) var character_node
 
 export (Vector2) var target
 export (bool) var relative = true
@@ -21,19 +22,22 @@ func _physics_process(delta):
 		_character.position = _character.target
 		set_physics_process(false)
 		yield(get_tree().create_timer(wait_time), "timeout")
-		player.state = "move_state"
+		#player.state = "move_state"
 		emit_signal("finished")
 		get_tree().current_scene.camera.follow()
 
 func interact():
-	if character == null:
-		_character = null
+	if not character_name and not character_node:
+		emit_signal("finished")
+		return
+	if character_name:
+		_character = get_tree().current_scene.find_node(character_name, true, false)
 	else:
-		_character = get_tree().current_scene.find_node(character, true, false)
+		_character = get_node(character_node)
 	if not _character:
 		emit_signal("finished")
 		return
-	player.state = "cutscene_state"
+	#player.state = "cutscene_state"
 	if follow:
 		get_tree().current_scene.camera.follow(_character)
 	if relative:

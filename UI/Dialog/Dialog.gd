@@ -12,7 +12,6 @@ signal finished
 var text = ["Test. dialog", "Test? dialog 2."]
 var char_stopper = [".", "?", "!"]
 var text_page = 0
-var cutscene = null
 var text_speed = .05
 var pause_speed = .5
 
@@ -51,8 +50,8 @@ func start():
 	timer.start()
 
 func end():
-	emit_signal("finished")
 	queue_free()
+	emit_signal("finished")
 
 func _input(event):
 	if event.is_action_pressed("action"):
@@ -61,8 +60,6 @@ func _input(event):
 				text_page += 1
 				start()
 			else:
-				if cutscene != null:
-					cutscene.action += 1
 				end()
 		elif text_visible.text[text_visible.visible_characters-1] in char_stopper:
 			timer.start()

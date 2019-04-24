@@ -25,13 +25,17 @@ func _ready():
 	var fade = FADE.instance()
 	get_tree().current_scene.add_child(fade)
 	fade.fade(0)
-	GData.pause_enabled = true
+	player.stop()
 	yield(fade, "fade_done")
+	player.resume()
+	GData.pause_enabled = true
 	var events = current_room.find_node("Events")
 	if events and events.get_child_count() > 0:
+		player.state = "cutscene_state"
 		for event in events.get_children():
 			event.interact()
 			yield(event, "finished")
+		player.state = "move_state"
 			#queue_free()
 
 func encounter():

@@ -5,8 +5,6 @@ onready var text = $MarginContainer/Text
 
 signal message_done
 
-var cutscene = null
-
 func _ready():
 	pass
 	#initialize(16,16,"Level Up!\nCheck the Menu for details.")
@@ -18,8 +16,8 @@ func _ready():
 #	rect_position.y = 8
 
 func initialize(x,y,msg):
-	rect_position = Vector2(x,y)
 	text.text = msg
+	rect_position = Vector2(x,y)
 
 func initialize_centered(msg):
 	text.text = msg
@@ -32,14 +30,10 @@ func _input(event):
 	if event.is_action_pressed("action") or event.is_action_pressed("back") or event.is_action_pressed("ui_cancel"):
 		if not event.is_action_pressed("ui_cancel"):
 			get_tree().set_input_as_handled()
-		if cutscene:
-			cutscene.action += 1
 		queue_free()
 		emit_signal("message_done")
 
 
 func _on_Timer_timeout():
-	if cutscene:
-		cutscene.action += 1
 	queue_free()
 	emit_signal("message_done")
