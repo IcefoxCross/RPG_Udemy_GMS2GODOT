@@ -5,11 +5,12 @@ onready var anim = $AnimationPlayer
 
 export (float) var move_speed = 100.0
 
+var start = Vector2()
 var target = null
 var spritedir = "down"
 
 func _ready():
-	pass
+	start = position
 
 func _physics_process(delta):
 	z_index = max(0,position.y)

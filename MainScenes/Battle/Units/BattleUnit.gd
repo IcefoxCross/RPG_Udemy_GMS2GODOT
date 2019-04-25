@@ -200,7 +200,7 @@ func approach_state():
 	var frames = GData.get_frames(target_x, start_pos.x, speed)
 	anim.playback_speed = GData.get_image_speed_from_frames(frames, sprite_frames)
 	# Set camera state
-	battle.camera.target.x = target_x - 150 * sprite.scale.x
+	battle.camera.target_pos.x = target_x - 150 * scale.x
 	battle.camera.state = "focus_state"
 	# Move to target
 	position.x = GData.approach(position.x, target_x, speed)
@@ -247,7 +247,7 @@ func ranged_attack_state(xoffset, yoffset, effect, effect_frame):
 	var sprite_data = GData.sprites[sprites["ranged"].get_path()]
 	if sprite.frame == sprite_data["hitframe"] and not zoomed:
 		zoomed = true
-		battle.camera.target.x = target_x - 150 * scale.x
+		battle.camera.target_pos.x = target_x - 150 * scale.x
 		battle.camera.state = "focus_state"
 	
 	if sprite.frame == effect_frame and not attacked:
@@ -277,7 +277,7 @@ func use_item_state():
 		return
 	change_anim("use_item")
 	if anim.current_animation_position == 0:
-		battle.camera.target.x = start_pos.x - 150 * sprite.scale.x
+		battle.camera.target_pos.x = start_pos.x - 150 * sprite.scale.x
 		battle.camera.state = "focus_state"
 	if sprite.frame == 4 and not used_item:
 		PStats.use_item(item_name)

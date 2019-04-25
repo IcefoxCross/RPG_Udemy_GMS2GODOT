@@ -14,6 +14,11 @@ var direction = {
 	"down": Vector2(0,1)
 }
 
+var save_data = {
+	"keys": {}
+}
+var loaded = false
+
 ### FUNCS ###
 func approach(start, end, shift):
 	if (start < end):
@@ -28,6 +33,9 @@ func chance(perc):
 func get_frames(x1, x2, speed):
 	var dis = abs(x1-x2)
 	return round(dis/speed)
+
+func save_key(node, node2):
+	return "%s%s%s%s%s" % [get_tree().current_scene.current_room.name, node.name, node.position.x, node.position.y, node2.name]
 
 func get_image_speed_from_frames(frames, image_number):
 	return (9/(frames/image_number))
@@ -56,6 +64,59 @@ func load_scene():
 		get_tree().current_scene.queue_free()
 		get_tree().get_root().add_child(room_scene)
 		room_scene = null
+
+#### SAVE / LOAD ####
+func save_game(file_name):
+	# Break cases
+	var player = get_tree().current_scene.find_node("Elizabeth")
+	if not player:
+		print("Error: player not found")
+		return
+	
+	# Save room
+	save_data["room"] = get_tree().current_scene.current_room.filename
+	# Save Player position
+	save_data["playerx"] = player.position.x
+	save_data["playery"] = player.position.y
+	save_data["playerdir"] = player.spritedir
+	# Save Player stats
+	save_data["level"] = PStats.level
+	save_data["items"] = PStats.items
+	
+	# Save Data
+	var save_file = File.new()
+	save_file.open("user://%s" % file_name, File.WRITE)
+	save_file.store_line(to_json(save_data))
+	save_file.close()
+
+func load_game(file_name):
+	# Break cases
+	var player = get_tree().current_scene.find_node("Elizabeth")
+	if not player:
+		print("Error: player not found")
+		return
+	
+	# Load Data
+	var save_file = File.new()
+	if save_file.file_exists("user://%s" % file_name):
+		save_file.open("user://%s" % file_name, File.READ)
+		var data = parse_json(save_file.get_line())
+		save_file.close()
+		# Load Room
+		last_room["room"] = data["room"]
+		last_room["x"] = data["playerx"]
+		last_room["y"] = data["playery"]
+		last_room["dir"] = data["playerdir"]
+		# Load Player Stats
+		PStats.level = data["level"]
+		PStats.items = data["items"]
+		PStats.stats = PStats.get_stats_from_class("elizabeth")
+		PStats.draw_health = PStats.stats["health"]
+		# Load Keys
+		save_data["keys"] = data["keys"]
+		return true
+	else:
+		return false
 
 #### CLASSES ####
 var classes = parse_json(get_class_data())

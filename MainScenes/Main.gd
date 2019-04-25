@@ -14,6 +14,10 @@ const MSG = preload("res://UI/Message.tscn")
 var current_room
 
 func _ready():
+	get_tree().paused = false
+	if GData.loaded:
+		GData.load_game("game01.save")
+		GData.loaded = false
 	var new_room = load(GData.last_room["room"]).instance()
 	$Room.add_child(new_room)
 	new_room.init(player)
@@ -29,14 +33,9 @@ func _ready():
 	yield(fade, "fade_done")
 	player.resume()
 	GData.pause_enabled = true
-	var events = current_room.find_node("Events")
-	if events and events.get_child_count() > 0:
-		player.state = "cutscene_state"
-		for event in events.get_children():
-			event.interact()
-			yield(event, "finished")
-		player.state = "move_state"
-			#queue_free()
+	for event in current_room.events:
+		event.interact()
+		yield(event, "finished")
 
 func encounter():
 	if player == null or randenc == null:
@@ -67,8 +66,8 @@ func create_message(x, y, text):
 
 func create_message_centered(text):
 	var msg = MSG.instance()
-	msg.initialize_centered(text)
 	gui.add_child(msg)
+	msg.initialize_centered(text)
 	return msg
 
 func _change_room(target_room):

@@ -1,7 +1,7 @@
 extends "res://Player/Camera2D.gd"
 
 var speed
-var target = Vector2()
+var target_pos = Vector2()
 
 func _ready():
 	timer = $Timer
@@ -24,23 +24,23 @@ func camera_screenshake(amount, _duration):
 	self.shake = true
 
 func intro_state():
-	target.x = Game.room_width *3/4
-	target.y = Game.room_height / 2
+	target_pos.x = Game.room_width *3/4
+	target_pos.y = Game.room_height / 2
 	
-	if position.distance_to(target) < 1:
-		position.x = target.x
-		position.y = target.y
+	if position.distance_to(target_pos) < 1:
+		position.x = target_pos.x
+		position.y = target_pos.y
 	
 	state = "idle_state"
 
 func idle_state():
-	target.x = Game.room_width *3/4
-	target.y = Game.room_height / 2
+	target_pos.x = Game.room_width *3/4
+	target_pos.y = Game.room_height / 2
 	#camera_approach(target.x,target.y,Game.room_width,Game.room_height,speed/2,speed/2)
-	camera_approach(target.x,target.y,1,1,speed/2,speed/2)
+	camera_approach(target_pos.x,target_pos.y,1,1,speed/2,speed/2)
 
 func focus_state():
-	camera_approach(target.x, Game.room_height/2, .95, .95, speed/2, speed / 1.5)
+	camera_approach(target_pos.x, Game.room_height/2, .95, .95, speed/2, speed / 1.5)
 
 func _on_Timer_timeout():
 	self.shake = false

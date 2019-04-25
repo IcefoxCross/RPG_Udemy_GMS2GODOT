@@ -19,6 +19,8 @@ func _ready():
 
 func _on_Button_pressed(button):
 	match button.name:
+		"StatsButton":
+			pass
 		"ItemsButton":
 			if PStats.items.size() > 0:
 				self.focus = false
@@ -28,6 +30,18 @@ func _on_Button_pressed(button):
 				menu.is_root = false
 				menu.previous = self
 				add_child(menu)
+		"SaveButton":
+			GData.save_game("game01.save")
+			get_tree().current_scene.create_message_centered("Game Saved!")
+		"LoadButton":
+			if GData.load_game("game01.save"):
+				var msg = get_tree().current_scene.create_message_centered("Game Loaded!")
+				yield(msg, "message_done")
+				get_tree().reload_current_scene()
+			else:
+				get_tree().current_scene.create_message_centered("There is no Saved Game!")
+		"ExitButton":
+			get_tree().quit()
 	last_focus = button
 
 func _on_Button_focus_entered():

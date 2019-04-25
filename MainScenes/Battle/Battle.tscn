@@ -437,7 +437,7 @@ script = ExtResource( 12 )
 [node name="EnemyUnit" parent="Units" instance=ExtResource( 13 )]
 light_mask = 1
 position = Vector2( 736, 224 )
-unit_name = "gargoyle"
+unit_name = "spider"
 
 [node name="Sprite" parent="Units/EnemyUnit" index="0"]
 light_mask = 1

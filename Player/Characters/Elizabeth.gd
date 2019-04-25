@@ -27,6 +27,7 @@ func start(pos, dir = "down"):
 	camera.smoothing_enabled = false
 	position = pos
 	spritedir = dir
+	anim_switch("idle")
 	match dir:
 		"left":
 			ray.cast_to = Vector2(-16,0)

@@ -4,6 +4,8 @@ export (String) var room_tilemap = "TileMap"
 
 signal change_room
 
+onready var events = $Events.get_children()
+
 var player
 var cell_size
 var room_size

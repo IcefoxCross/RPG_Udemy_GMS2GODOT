@@ -1,7 +1,7 @@
 extends PanelContainer
 
 onready var npr = $NinePatchRect
-onready var text = $MarginContainer/Text
+onready var textbox = $MarginContainer/Text
 
 signal message_done
 
@@ -16,11 +16,11 @@ func _ready():
 #	rect_position.y = 8
 
 func initialize(x,y,msg):
-	text.text = msg
+	textbox.text = msg
 	rect_position = Vector2(x,y)
 
 func initialize_centered(msg):
-	text.text = msg
+	textbox.text = msg
 	var width = ProjectSettings.get_setting("display/window/size/width")
 	var height = ProjectSettings.get_setting("display/window/size/height")
 	yield(self,"resized")

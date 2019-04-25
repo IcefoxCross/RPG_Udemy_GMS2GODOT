@@ -17,7 +17,11 @@ func _ready():
 	set_physics_process(false)
 
 func _physics_process(delta):
-	_character.position += target.normalized() * _character.move_speed * delta
+	if relative:
+		_character.position += target.normalized() * _character.move_speed * delta
+	else:
+		var vector = _character.target - _character.position
+		_character.position += vector.normalized() * _character.move_speed * delta
 	if _character.position.distance_to(_character.target) <= 0.5:
 		_character.position = _character.target
 		set_physics_process(false)
