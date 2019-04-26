@@ -201,6 +201,7 @@ func get_item_data():
 
 ### ITEM EFFECTS ###
 func heal_effect(args):
+	get_tree().current_scene.sfx.sound("res://Audio/SFX/potion.wav")
 	var amount = args[0]
 	PStats.stats["health"] = min(PStats.stats["health"] + amount, PStats.stats["maxhealth"])
 	if get_tree().current_scene.name == "Battle":

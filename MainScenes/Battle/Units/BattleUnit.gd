@@ -30,6 +30,7 @@ var state
 var stats_object = null
 var anim_speed = {}
 var sprites = {}
+var sfx_death
 
 var battle
 var start_pos
@@ -64,6 +65,8 @@ func start(_name, _level, is_enemy, idle_speed, attack_speed, hit_speed, range_s
 	sprite.scale.x =  -1 if is_enemy else 1
 	ray.cast_to.x = 16 * (-1 if is_enemy else 1)
 	ray.position.x = 16 * (-1 if is_enemy else 1)
+	
+	sfx_death = "res://Audio/SFX/%s_die.wav" % _name
 	
 	sprites["idle"] = load(str("res://MainScenes/Battle/Units/Assets/",_name,"/s_battle_",_name,"_idle.png"))
 	sprites["approach"] = load(str("res://MainScenes/Battle/Units/Assets/",_name,"/s_battle_",_name,"_approach.png"))
@@ -304,6 +307,7 @@ func hit_state():
 	sprite.position.x = sprite_start_pos.x - sin(frames) * 32 * sprite.scale.x
 	
 	if (sprite.position.x - sprite_start_pos.x > 24 and stats_object.stats["health"] <= 0):
+		sfx.sound(sfx_death)
 		state = "death_state"
 		anim.stop()
 
