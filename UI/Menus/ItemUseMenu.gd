@@ -18,6 +18,7 @@ func _ready():
 	first_option.grab_focus()
 
 func _on_Button_pressed(button):
+	sfx.sound(SFX_SELECT)
 	match button.name:
 		"UseButton":
 			useOption()
@@ -27,6 +28,7 @@ func _on_Button_pressed(button):
 			dropOption()
 
 func _on_Button_focus_entered():
+	sfx.sound(SFX_MOVE)
 	var focused = options_list.get_focus_owner()
 	for button in options_list.get_children():
 		if button == focused:

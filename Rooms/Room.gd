@@ -1,6 +1,7 @@
 extends Node2D
 
 export (String) var room_tilemap = "TileMap"
+export(String, FILE, "*.ogg") var bgm = "none"
 
 signal change_room
 

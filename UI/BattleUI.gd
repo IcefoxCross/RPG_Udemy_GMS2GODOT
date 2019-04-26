@@ -3,8 +3,12 @@ extends Control
 const ITEMS_MENU = preload("res://UI/Menus/ItemListMenu.tscn")
 const ACTIONS_MENU = preload("res://UI/Menus/ActionListMenu.tscn")
 
+const SFX_MOVE = "res://Audio/SFX/menu_move.wav"
+const SFX_SELECT = "res://Audio/SFX/menu_select.wav"
+
 onready var frame = $Frame
 onready var options = $Frame/HBoxContainer
+onready var sfx = $SFX
 
 var target_y
 var enabled
@@ -35,6 +39,7 @@ func _process(delta):
 
 func _on_Button_Pressed(option):
 	if Player and enabled:
+		sfx.sound(SFX_SELECT)
 		match option.name:
 			"ActionIcon":
 				enabled = false
@@ -71,6 +76,7 @@ func _on_Focus_Entered(option):
 	if not enabled:
 		focused.release_focus()
 		return
+	sfx.sound(SFX_MOVE)
 	for button in options.get_children():
 		if button == focused:
 			button.modulate = Color.white

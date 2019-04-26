@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MainScenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://Player/Characters/Elizabeth.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Assets/b_vignette.png" type="Texture" id=3]
 [ext_resource path="res://MainScenes/Battle/RandomEncounters.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Audio/BGM.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Audio/SFX.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -39,7 +41,13 @@ __meta__ = {
 }
 
 [node name="RandomEncounters" parent="Common" instance=ExtResource( 4 )]
-on = false
 
 [node name="Events" type="Node" parent="Common"]
+
+[node name="BGM" parent="Common" instance=ExtResource( 5 )]
+pause_mode = 2
+bus = "BGM"
+
+[node name="SFX" parent="Common" instance=ExtResource( 6 )]
+volume_db = -20.0
 

@@ -1,9 +1,13 @@
 extends Control
 
+const SFX_MOVE = "res://Audio/SFX/menu_move.wav"
+const SFX_SELECT = "res://Audio/SFX/menu_select.wav"
+
 signal get_focus
 signal erased
 
 onready var foreground = $NinePatchRect/ColorRect
+onready var sfx = $SFX
 
 var pause_state
 var focus setget set_focus
@@ -30,8 +34,7 @@ func _input(event):
 #			if not visible:
 #				self.focus = true
 #		elif not is_root:
-		queue_free()
-		emit_signal("erased")
+		destroy()
 	if event.is_action_pressed("back"):
 		if get_tree().paused or get_tree().current_scene.name == "Battle":
 			if not is_root:
@@ -39,8 +42,7 @@ func _input(event):
 			else:
 				get_tree().paused = false
 				visible = false
-			queue_free()
-			emit_signal("erased")
+			destroy()
 			get_tree().set_input_as_handled()
 #	if event.is_action_pressed("action"):
 #		if get_tree().paused and focus:
@@ -51,6 +53,10 @@ func _input(event):
 #			menu.is_root = false
 #			menu.previous = self
 #			get_parent().add_child(menu)
+
+func destroy():
+	queue_free()
+	emit_signal("erased")
 
 func set_focus(value):
 	focus = value

@@ -37,6 +37,7 @@ func create_actions_option_list():
 	return _options
 
 func _on_ItemList_item_activated(index):
+	sfx.sound(SFX_SELECT)
 	self.focus = false
 	var menu = ACTION_OPTIONS.instance()
 	menu.rect_position.x = npr.rect_position.x + npr.rect_size.x + 4
@@ -53,3 +54,6 @@ func _on_Get_Focus():
 		list.select(last_focus)
 	else:
 		list.select(0)
+
+func _on_ItemList_item_selected(index):
+	sfx.sound(SFX_MOVE)

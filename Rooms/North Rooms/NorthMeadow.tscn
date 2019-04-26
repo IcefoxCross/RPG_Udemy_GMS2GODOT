@@ -1147,6 +1147,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 48, 0, 48 )
 28/z_index = 0
 
 [node name="NorthMeadow" index="0" instance=ExtResource( 1 )]
+bgm = "res://Audio/BGM/a_graveyard_music.ogg"
 
 [node name="TileMap" parent="." index="0"]
 tile_set = ExtResource( 2 )

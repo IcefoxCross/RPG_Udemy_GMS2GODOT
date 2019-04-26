@@ -3,6 +3,8 @@ extends Node
 onready var player = $Common/Elizabeth
 onready var gui = $Common/GUI
 onready var randenc = $Common/RandomEncounters
+onready var bgm = $Common/BGM
+onready var sfx = $Common/SFX
 
 onready var camera = player.camera
 
@@ -12,6 +14,7 @@ const OPTIONS = preload("res://UI/Menus/OptionsMenu.tscn")
 const MSG = preload("res://UI/Message.tscn")
 
 var current_room
+var current_bgm
 
 func _ready():
 	get_tree().paused = false
@@ -22,6 +25,16 @@ func _ready():
 	$Room.add_child(new_room)
 	new_room.init(player)
 	current_room = new_room
+	# Set music
+	if current_room.bgm != "none":
+		if File.new().file_exists(current_room.bgm):
+			current_bgm = current_room.bgm
+			bgm.volume_db = -10
+			bgm.stream = load(current_room.bgm)
+			bgm.play()
+	else:
+		bgm.fade_out()
+	# Set Player
 	player.start(Vector2(GData.last_room["x"],GData.last_room["y"]),GData.last_room["dir"])
 	current_room.connect("change_room", self, "_change_room")
 	player.connect("encounter", self, "encounter")
@@ -49,6 +62,7 @@ func encounter():
 		var fade = BATTLE.instance()
 		get_tree().current_scene.add_child(fade)
 		fade.fade(1)
+		bgm.fade_out()
 		yield(fade, "fade_done")
 		#GData.switch_scene("res://MainScenes/Battle/Battle.tscn")
 		get_tree().change_scene("res://MainScenes/Battle/Battle.tscn")
@@ -86,6 +100,18 @@ func _change_room_deferred(target_room):
 	new_room.init(player)
 	current_room = new_room
 	var pos = current_room.find_node(tofrom).spawn_point
-	player.start(pos)
+	player.start(pos,player.spritedir)
 	fade.fade(0)
+	if current_room.bgm != "none":
+		if current_bgm != current_room.bgm:
+			if File.new().file_exists(current_room.bgm):
+				bgm.fade_out()
+				yield(bgm,"faded")
+				bgm.volume_db = -10
+				current_bgm = current_room.bgm
+				bgm.stream = load(current_room.bgm)
+				bgm.play()
+	else:
+		current_bgm = "none"
+		bgm.fade_out()
 	current_room.connect("change_room", self, "_change_room")

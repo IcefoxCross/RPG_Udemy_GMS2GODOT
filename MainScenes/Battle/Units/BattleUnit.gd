@@ -11,6 +11,7 @@ onready var anim = $AnimationPlayer
 onready var ui = $BattleUnitUI
 onready var ray = $RayCast2D
 onready var shader = $Sprite.material
+onready var sfx = $SFX
 
 signal battle_won
 
@@ -90,6 +91,7 @@ func action_defend():
 	self.defend = true
 	action_meter = max_action_meter / 2
 	battle.play = true
+	sfx.sound("res://Audio/SFX/defend.wav")
 
 func deal_damage(atk, def, critical, modifier):
 	var attacker = atk.stats_object
@@ -207,9 +209,18 @@ func approach_state():
 	if position.x == target_x:
 		state = "attack_state"
 		attacked = false
+	if sprite.frame == 1 and not sfx.playing:
+		sfx.sound("res://Audio/SFX/attack_swordswing.wav")
 
 func attack_state():
 	change_anim("attack")
+	if anim.current_animation_position == 0:
+		var foe = ray.get_collider().get_parent()
+		if foe.stats_object.defend:
+			sfx.sound("res://Audio/SFX/impact_defend.wav")
+		else:
+			sfx.sound("res://Audio/SFX/impact.wav")
+	
 	if sprite.frame == 1 and not attacked:
 		var foe = ray.get_collider()
 		if foe != null and foe.get_parent().is_in_group("unit"):

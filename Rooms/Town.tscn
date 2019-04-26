@@ -546,6 +546,7 @@ extents = Vector2( 16, 8 )
 
 [node name="Town" index="0" instance=ExtResource( 1 )]
 room_tilemap = "Ground"
+bgm = "res://Audio/BGM/a_town_music.ogg"
 
 [node name="Grass" type="TileMap" parent="." index="0"]
 tile_set = ExtResource( 2 )

@@ -2,6 +2,7 @@ extends Node2D
 
 const SHINE = preload("res://UI/Effects/Shine.tscn")
 const ARROW = preload("res://UI/LevelUp/LevelUpArrow.tscn")
+const SFX = "res://Audio/SFX/levelup.wav"
 
 onready var sprite = $Sprite
 onready var anim = $AnimationPlayer
@@ -9,6 +10,7 @@ onready var timer = $Timer
 
 func _ready():
 	randomize()
+	get_tree().current_scene.sfx.sound(SFX)
 
 func _process(delta):
 	if anim.current_animation_position == anim.current_animation_length:

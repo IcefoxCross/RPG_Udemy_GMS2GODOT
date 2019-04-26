@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MainScenes/Battle/Effects/Projectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MainScenes/Battle/Effects/SonarSpell.gd" type="Script" id=2]
 [ext_resource path="res://UI/Assets/Effects/s_sonar_attack.png" type="Texture" id=3]
+[ext_resource path="res://Audio/SFX/sonar_with_impact.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "anim"
@@ -31,5 +32,8 @@ hframes = 9
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 autoplay = "anim"
 anims/anim = SubResource( 1 )
+
+[node name="SFX" parent="." index="2"]
+stream = ExtResource( 4 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

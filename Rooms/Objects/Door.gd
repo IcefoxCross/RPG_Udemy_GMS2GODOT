@@ -1,6 +1,7 @@
 extends Area2D
 
 export (String, FILE) var target_room
+export(String, FILE, "*.wav") var sound = "res://Audio/SFX/enter_next_area.wav"
 
 onready var pos = $Position2D
 
@@ -13,4 +14,5 @@ func _ready():
 
 func _on_Door_body_entered(body):
 	if body.is_in_group("player"):
+		get_tree().current_scene.sfx.sound(sound)
 		emit_signal("transition_room", target_room)

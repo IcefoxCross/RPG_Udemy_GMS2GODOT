@@ -43,3 +43,4 @@ custom_styles/bg = SubResource( 2 )
 custom_fonts/font = SubResource( 3 )
 
 [connection signal="item_activated" from="NinePatchRect/MarginContainer/ItemList" to="." method="_on_ItemList_item_activated"]
+[connection signal="item_selected" from="NinePatchRect/MarginContainer/ItemList" to="." method="_on_ItemList_item_selected"]

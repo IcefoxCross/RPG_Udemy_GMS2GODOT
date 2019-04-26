@@ -11,6 +11,7 @@ var last_focus = null
 
 func _ready():
 	._ready()
+	get_tree().current_scene.bgm.volume_db = -20
 	get_tree().paused = true
 	for button in options_list.get_children():
 		button.connect("focus_entered", self, "_on_Button_focus_entered")
@@ -18,6 +19,7 @@ func _ready():
 	first_option.grab_focus()
 
 func _on_Button_pressed(button):
+	sfx.sound(SFX_SELECT)
 	match button.name:
 		"StatsButton":
 			pass
@@ -44,7 +46,13 @@ func _on_Button_pressed(button):
 			get_tree().quit()
 	last_focus = button
 
+func destroy():
+	.destroy()
+	get_tree().current_scene.bgm.volume_db = -10
+	get_tree().paused = false
+
 func _on_Button_focus_entered():
+	sfx.sound(SFX_MOVE)
 	var focused = options_list.get_focus_owner()
 	for button in options_list.get_children():
 		if button == focused:

@@ -9,6 +9,9 @@ func _ready():
 
 func _process(delta):
 	._process(delta)
+	if sprite.frame == 2 and not sfx.playing:
+		sfx.play()
+	
 	if sprite.frame == 7 and not attack:
 		attack = true
 		get_tree().current_scene.camera.camera_screenshake(8,.2)

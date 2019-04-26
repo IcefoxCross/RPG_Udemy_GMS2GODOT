@@ -7,6 +7,7 @@ var attack = false
 
 func _ready():
 	._ready()
+	sfx.play()
 
 func _process(delta):
 	._process(delta)

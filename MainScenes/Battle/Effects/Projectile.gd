@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var sprite = $Sprite
+onready var sfx = $SFX
 
 signal finished
 

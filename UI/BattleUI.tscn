@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI/BattleUI.gd" type="Script" id=1]
 [ext_resource path="res://UI/Assets/Battle/UI/s_battle_ui_frame_0.png" type="Texture" id=2]
 [ext_resource path="res://UI/Assets/Battle/UI/s_battle_ui_action_0.png" type="Texture" id=3]
 [ext_resource path="res://UI/Assets/Battle/UI/s_battle_ui_item_0.png" type="Texture" id=4]
 [ext_resource path="res://UI/Assets/Battle/UI/s_battle_ui_run_0.png" type="Texture" id=5]
+[ext_resource path="res://Audio/SFX.tscn" type="PackedScene" id=6]
 
 [node name="BattleUI" type="Control"]
 anchor_right = 1.0
@@ -57,4 +58,6 @@ focus_neighbour_left = NodePath("../ItemIcon")
 focus_neighbour_right = NodePath("../ActionIcon")
 size_flags_horizontal = 3
 texture_normal = ExtResource( 5 )
+
+[node name="SFX" parent="." instance=ExtResource( 6 )]
 

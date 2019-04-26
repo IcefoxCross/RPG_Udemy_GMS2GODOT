@@ -5,6 +5,7 @@ onready var text_visible = $Control/DialogBox/RichTextLabel
 onready var portrait_frame = $Control/PortraitFrame
 onready var portrait = $Control/PortraitFrame/Portrait
 onready var timer = $Control/DialogBox/Timer
+onready var sound = $SFX
 
 signal finished
 

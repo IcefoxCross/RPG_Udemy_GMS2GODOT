@@ -7,6 +7,8 @@ const MSG = preload("res://UI/Message.tscn")
 onready var camera = $BattleCamera
 onready var enemy = $Units/EnemyUnit
 onready var player = $Units/PlayerUnit
+onready var sfx = $SFX
+onready var bgm = $BGM
 
 var play
 
@@ -18,6 +20,8 @@ func _ready():
 	get_tree().current_scene.add_child(fade)
 	fade.fade(0)
 	camera.start()
+	bgm.stream = load("res://Audio/BGM/a_battle_music.ogg")
+	bgm.play()
 	enemy.connect("battle_won", self, "end_battle")
 
 func _process(delta):
@@ -33,6 +37,7 @@ func end_battle():
 	var fade = FADE.instance()
 	get_tree().current_scene.add_child(fade)
 	fade.fade(1)
+	bgm.fade_out()
 	yield(fade, "fade_done")
 	#GData.load_scene()
 	get_tree().change_scene("res://MainScenes/Main.tscn")
