@@ -22,7 +22,8 @@ func _ready():
 	camera.start()
 	bgm.stream = load("res://Audio/BGM/a_battle_music.ogg")
 	bgm.play()
-	enemy.connect("battle_won", self, "end_battle")
+	player.connect("end_battle", self, "_on_end_battle")
+	enemy.connect("end_battle", self, "_on_end_battle")
 
 func _process(delta):
 	if find_node("PlayerUnit") and find_node("EnemyUnit"):
@@ -31,16 +32,21 @@ func _process(delta):
 			enemy.state = "idle_state"
 			play = true
 
-func end_battle():
+func _on_end_battle(game_over = false):
 	play = false
 	camera.state = "idle_state"
 	var fade = FADE.instance()
 	get_tree().current_scene.add_child(fade)
+	if game_over:
+		fade.duration = 2
 	fade.fade(1)
 	bgm.fade_out()
 	yield(fade, "fade_done")
 	#GData.load_scene()
-	get_tree().change_scene("res://MainScenes/Main.tscn")
+	if game_over:
+		get_tree().change_scene("res://MainScenes/GameOver.tscn")
+	else:
+		get_tree().change_scene("res://MainScenes/Main.tscn")
 
 func create_message(x, y, text):
 	var msg = MSG.instance()

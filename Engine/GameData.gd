@@ -17,7 +17,7 @@ var direction = {
 var save_data = {
 	"keys": {}
 }
-var loaded = false
+var loaded = true
 
 ### FUNCS ###
 func approach(start, end, shift):
@@ -136,7 +136,7 @@ func get_class_data():
 		"spider": {
 			"name": "Spider",
 			"health": 3,
-			"attack": 5,
+			"attack": 500,
 			"defense": 4,
 			"speed": 10,
 			"critical": 5,
@@ -146,7 +146,7 @@ func get_class_data():
 		"gargoyle": {
 			"name": "Gargoyle",
 			"health": 10,
-			"attack": 4,
+			"attack": 40,
 			"defense": 8,
 			"speed": 4,
 			"critical": 10,

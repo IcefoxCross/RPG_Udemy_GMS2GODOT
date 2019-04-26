@@ -13,7 +13,7 @@ onready var ray = $RayCast2D
 onready var shader = $Sprite.material
 onready var sfx = $SFX
 
-signal battle_won
+signal end_battle
 
 var level setget set_level
 var _class
@@ -118,7 +118,9 @@ func destroy():
 		# Add EXP
 		PStats.stats["experience"] += min(1+level/2, 1) * stats_object.stats["experience"]
 		queue_free()
-		emit_signal("battle_won")
+		emit_signal("end_battle")
+	else:
+		emit_signal("end_battle", true)
 
 func change_anim(image):
 	if sprite.texture != sprites[image]:
@@ -306,7 +308,7 @@ func hit_state():
 	var frames = (anim.current_animation_position / anim.current_animation_length) * PI
 	sprite.position.x = sprite_start_pos.x - sin(frames) * 32 * sprite.scale.x
 	
-	if (sprite.position.x - sprite_start_pos.x > 24 and stats_object.stats["health"] <= 0):
+	if (abs(sprite.position.x - sprite_start_pos.x) > 24 and stats_object.stats["health"] <= 0):
 		sfx.sound(sfx_death)
 		state = "death_state"
 		anim.stop()

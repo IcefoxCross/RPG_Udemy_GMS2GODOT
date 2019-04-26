@@ -27,9 +27,6 @@ func _ready():
 
 func _process(delta):
 	update_draw_health()
-	# Update stats for death and level up
-	if draw_health <= 0:
-		get_tree().change_scene("res://MainScenes/GameOver.tscn")
 	# Level up
 	if stats["experience"] >= stats["maxexperience"]:
 		if not get_tree().current_scene.has_node("LevelUp"):

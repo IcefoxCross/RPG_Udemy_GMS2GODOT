@@ -63,6 +63,10 @@ func _on_Button_Pressed(option):
 					var focused = options.get_focus_owner()
 					focused.release_focus()
 					add_child(menu)
+			"RunIcon":
+				enabled = false
+				Player.state = "wait_state"
+				get_tree().current_scene.end_battle()
 
 func _on_ItemList_Erased():
 	options.get_children()[1].grab_focus() 

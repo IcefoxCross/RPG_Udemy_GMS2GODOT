@@ -36,4 +36,4 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_Timer_timeout():
 	queue_free()
-	get_tree().current_scene.end_battle()
+	get_tree().current_scene._on_end_battle()
