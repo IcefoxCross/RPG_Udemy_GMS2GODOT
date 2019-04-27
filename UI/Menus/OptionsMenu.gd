@@ -22,7 +22,7 @@ func _on_Button_pressed(button):
 	sfx.sound(SFX_SELECT)
 	match button.name:
 		"StatsButton":
-			pass
+			statsOption()
 		"ItemsButton":
 			if PStats.items.size() > 0:
 				self.focus = false
@@ -45,6 +45,14 @@ func _on_Button_pressed(button):
 		"ExitButton":
 			get_tree().quit()
 	last_focus = button
+
+func statsOption():
+	var msg = get_tree().current_scene.create_message(npr.rect_position.x + npr.rect_size.x + 4, npr.rect_position.y, PStats.playerInfo(), false)
+	hide()
+	yield(msg, "message_done")
+	show()
+	self.focus = true
+	
 
 func destroy():
 	.destroy()

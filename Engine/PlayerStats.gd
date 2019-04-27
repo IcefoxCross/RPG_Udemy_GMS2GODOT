@@ -66,6 +66,14 @@ func update_draw_health():
 	else:
 		draw_health = stats["health"]
 
+func playerInfo():
+	var info = ""
+	info += stats["name"]
+	info += "\nLevel: %s" % level
+	info += "\nNext Level: %s exp" % (stats["maxexperience"] - stats["experience"])
+	info += "\nHealth: %s / %s" % [stats["health"], stats["maxhealth"]]
+	return info
+
 ### ITEMS ###
 func pickup_item(item, amount):
 	if items.has(item):

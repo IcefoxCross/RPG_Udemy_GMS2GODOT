@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Rooms/Room.gd" type="Script" id=1]
 [ext_resource path="res://Tileset/MeadowForest/b_dirt.png" type="Texture" id=2]
+[ext_resource path="res://MainScenes/Battle/RandomEncounters.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -40,4 +41,7 @@ format = 1
 [node name="Doors" type="Node" parent="."]
 
 [node name="Events" type="Node" parent="."]
+
+[node name="RandomEncounters" parent="." instance=ExtResource( 3 )]
+on = false
 

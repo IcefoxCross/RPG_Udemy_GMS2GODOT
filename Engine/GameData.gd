@@ -17,7 +17,11 @@ var direction = {
 var save_data = {
 	"keys": {}
 }
-var loaded = true
+var loaded = false
+
+### BATTLE VARS ###
+var b_enemy = "none"
+var b_level = 1
 
 ### FUNCS ###
 func approach(start, end, shift):
@@ -49,22 +53,6 @@ var last_room = {
 	"dir": "right"
 }
 
-## NOT WORKING ##
-var loaded_scene = false
-func switch_scene(target_scene):
-	room_scene = get_tree().current_scene
-	get_tree().get_root().remove_child(room_scene)
-	var new_scene = load(target_scene).instance()
-	get_tree().get_root().add_child( new_scene )
-	get_tree().set_current_scene( new_scene )
-
-func load_scene():
-	if room_scene != null:
-		loaded_scene = true
-		get_tree().current_scene.queue_free()
-		get_tree().get_root().add_child(room_scene)
-		room_scene = null
-
 #### SAVE / LOAD ####
 func save_game(file_name):
 	# Break cases
@@ -82,6 +70,7 @@ func save_game(file_name):
 	# Save Player stats
 	save_data["level"] = PStats.level
 	save_data["items"] = PStats.items
+	save_data["stats"] = PStats.stats
 	
 	# Save Data
 	var save_file = File.new()
@@ -110,7 +99,7 @@ func load_game(file_name):
 		# Load Player Stats
 		PStats.level = data["level"]
 		PStats.items = data["items"]
-		PStats.stats = PStats.get_stats_from_class("elizabeth")
+		PStats.stats = data["stats"]
 		PStats.draw_health = PStats.stats["health"]
 		# Load Keys
 		save_data["keys"] = data["keys"]
@@ -136,7 +125,7 @@ func get_class_data():
 		"spider": {
 			"name": "Spider",
 			"health": 3,
-			"attack": 500,
+			"attack": 5,
 			"defense": 4,
 			"speed": 10,
 			"critical": 5,

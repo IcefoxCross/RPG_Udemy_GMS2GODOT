@@ -56,7 +56,7 @@ margin_bottom = 65.0
 expand = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
-volume_db = -35.0
+volume_db = -20.0
 bus = "SFX"
 
 [connection signal="timeout" from="Control/DialogBox/Timer" to="." method="_on_Timer_timeout"]

@@ -805,10 +805,10 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 48, 0, 48 )
 23/shapes = [  ]
 23/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=43]
+[sub_resource type="RectangleShape2D" id=42]
 extents = Vector2( 8, 16 )
 
-[node name="WestMeadow" index="0" instance=ExtResource( 1 )]
+[node name="WestMeadow" instance=ExtResource( 1 )]
 
 [node name="TileMap" parent="." index="0"]
 tile_set = ExtResource( 2 )
@@ -843,10 +843,14 @@ target_room = "res://Rooms/Town.tscn"
 
 [node name="CollisionShape2D" parent="Doors/WestMeadowTown" index="0"]
 position = Vector2( 8, 16 )
-shape = SubResource( 43 )
+shape = SubResource( 42 )
 
 [node name="Position2D" parent="Doors/WestMeadowTown" index="1"]
 position = Vector2( -16, 16 )
+
+[node name="RandomEncounters" parent="." index="7"]
+on = true
+enemy = "spider"
 
 
 [editable path="Doors/WestMeadowTown"]

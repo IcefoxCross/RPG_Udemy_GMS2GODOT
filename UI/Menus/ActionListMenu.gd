@@ -12,7 +12,7 @@ var last_focus = null
 func _ready():
 	._ready()
 	list.clear()
-	npr.rect_size = Vector2(80,44)
+	npr.rect_size = Vector2(80,53)
 	options = create_actions_option_list()
 	for option in options:
 		list.add_item(option["display"])

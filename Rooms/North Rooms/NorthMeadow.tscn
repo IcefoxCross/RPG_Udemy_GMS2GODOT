@@ -1222,5 +1222,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="RandomEncounters" parent="." index="9"]
+on = true
+enemy = "gargoyle"
+level = 10
+
 
 [editable path="Doors/NorthMeadowTown"]

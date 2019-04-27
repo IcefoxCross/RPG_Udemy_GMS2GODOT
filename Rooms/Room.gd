@@ -6,6 +6,7 @@ export(String, FILE, "*.ogg") var bgm = "none"
 signal change_room
 
 onready var events = $Events.get_children()
+onready var rand_e = $RandomEncounters
 
 var player
 var cell_size

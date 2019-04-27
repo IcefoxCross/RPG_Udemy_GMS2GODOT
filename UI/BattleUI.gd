@@ -66,7 +66,7 @@ func _on_Button_Pressed(option):
 			"RunIcon":
 				enabled = false
 				Player.state = "wait_state"
-				get_tree().current_scene.end_battle()
+				get_tree().current_scene._on_end_battle()
 
 func _on_ItemList_Erased():
 	options.get_children()[1].grab_focus() 
