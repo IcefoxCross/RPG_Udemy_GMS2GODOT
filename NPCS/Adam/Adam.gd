@@ -1,5 +1,10 @@
 extends "res://NPCS/Character.gd"
 
+"""
+Adam
+	Instanced Character with unique dialog and portrait
+"""
+
 func _ready():
 	._ready()
 	

@@ -1,5 +1,11 @@
 extends Node2D
 
+"""
+Battle
+	This Node holds and hosts the entire battle process, from setting up the Units, to finishing the fight, handling if the player won or lost.
+	The battle cycles, camera movement and actions process is handled by each individual element
+"""
+
 const BATTLE = preload("res://UI/BattleTransition.tscn")
 const FADE = preload("res://UI/FadeTransition.tscn")
 const MSG = preload("res://UI/Message.tscn")

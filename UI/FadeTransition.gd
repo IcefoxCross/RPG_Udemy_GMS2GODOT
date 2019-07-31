@@ -1,5 +1,10 @@
 extends CanvasLayer
 
+"""
+Fade Transition
+	Basic color change effect to signal the switch between two Rooms.
+"""
+
 export (float) var duration = 1.0
 
 onready var rect = $Control/ColorRect

@@ -1,5 +1,11 @@
 extends Node
 
+"""
+Player Stats Node
+An Autoload node that keeps and manages information from the playable character, including:
+	experience and level up, health and stats calculation, item handling (add, use, drop)
+"""
+
 var level
 var _class
 var items

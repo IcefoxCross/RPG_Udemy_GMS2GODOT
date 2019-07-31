@@ -1,5 +1,10 @@
 extends Area2D
 
+"""
+Door
+	Node that transfers the player to a new map when the playable character collides with it.
+"""
+
 export (String, FILE) var target_room
 export(String, FILE, "*.wav") var sound = "res://Audio/SFX/enter_next_area.wav"
 

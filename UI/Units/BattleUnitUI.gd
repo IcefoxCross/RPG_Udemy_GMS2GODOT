@@ -1,5 +1,10 @@
 extends Control
 
+"""
+Battle Unit UI
+	Displays basic information of the Unit is instanced to, including Health, Action bar, and its current Level.
+"""
+
 onready var info = $InfoBar
 onready var action = $InfoBar/ActionMeter
 onready var health = $InfoBar/HealthBar

@@ -1,5 +1,13 @@
 extends Control
 
+"""
+Nest Menu
+	Basic Control Node that can hold instances of the same Node as child, and be displayed on top of it, to created a nested system of submenus.
+	When the Instanced NestMenu is erased, the focus is returned to its parent NestMenu, to keep a hierarchical order.
+	If the NestMenu was the root of all of the other ones, they are all destroyed, spreading the action to its NestMenu children.
+	Must not be used directly, instead create an Inherited Scene from this, and implement its unique functionality.
+"""
+
 const SFX_MOVE = "res://Audio/SFX/menu_move.wav"
 const SFX_SELECT = "res://Audio/SFX/menu_select.wav"
 

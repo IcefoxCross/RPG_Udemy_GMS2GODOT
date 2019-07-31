@@ -1,5 +1,10 @@
 extends "res://Player/Camera2D.gd"
 
+"""
+Battle Camera
+	Handles scrolling, zoom and shake of the visible camera during battle
+"""
+
 var speed
 var target_pos = Vector2()
 

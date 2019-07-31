@@ -1,5 +1,10 @@
 extends Node2D
 
+"""
+Background
+	Displays and scrolls the background layers to give a parallax effect
+"""
+
 onready var sprites = [$Sprite1,$Sprite2,$Sprite3,$Sprite4,
 					$Sprite5,$Sprite6,$Sprite7,$Sprite8]
 

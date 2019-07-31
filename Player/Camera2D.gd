@@ -1,5 +1,10 @@
 extends Camera2D
 
+"""
+Camera2D
+	Camera Node with functions to control position, zoom and shake, it can follow whichever Target is assigned.
+"""
+
 onready var timer = $Timer
 
 export (float) var amplitude = 6.0

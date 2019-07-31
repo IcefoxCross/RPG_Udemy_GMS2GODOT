@@ -1,5 +1,10 @@
 extends "res://MainScenes/Battle/Units/BattleUnit.gd"
 
+"""
+Player Unit Node
+	Inherits from Battle Unit, performs actions based on what is selected in its BattleUI.
+"""
+
 func _ready():
 	._ready()
 	

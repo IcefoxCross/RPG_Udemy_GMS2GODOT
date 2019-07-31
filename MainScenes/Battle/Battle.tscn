@@ -504,7 +504,6 @@ bus = "BGM"
 [node name="SFX" parent="." instance=ExtResource( 18 )]
 volume_db = 0.0
 
-
 [editable path="BattleCamera"]
 
 [editable path="Units/EnemyUnit"]

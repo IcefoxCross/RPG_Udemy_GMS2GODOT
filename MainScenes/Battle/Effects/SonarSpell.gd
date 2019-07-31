@@ -1,5 +1,10 @@
 extends "res://MainScenes/Battle/Effects/Projectile.gd"
 
+"""
+Sonar Spell
+	A basic spell that casts a small gust if wind to the enemy, making it flash blue for a brief time, with a great chance to inflict critical damage.
+"""
+
 onready var anim = $AnimationPlayer
 
 var speed = 3

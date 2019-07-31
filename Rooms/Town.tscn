@@ -544,7 +544,7 @@ extents = Vector2( 8, 16 )
 [sub_resource type="RectangleShape2D" id=33]
 extents = Vector2( 16, 8 )
 
-[node name="Town" instance=ExtResource( 1 )]
+[node name="Town" index="0" instance=ExtResource( 1 )]
 room_tilemap = "Ground"
 bgm = "res://Audio/BGM/a_town_music.ogg"
 
@@ -619,7 +619,6 @@ relative = false
 [node name="ShowMessageEvent" parent="Events/EventsParent" index="1" instance=ExtResource( 16 )]
 text = "Welcome to the town!"
 centered = true
-
 
 [editable path="Doors/TownWestMeadow"]
 

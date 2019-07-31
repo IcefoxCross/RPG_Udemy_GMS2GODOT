@@ -1,5 +1,11 @@
 extends Node
 
+"""
+Main
+	Main Game scene, hosts map movement, playable character and main menu.
+	Controls random encounter processing, menu calling, and map transition.
+"""
+
 onready var player = $Common/Elizabeth
 onready var gui = $Common/GUI
 onready var bgm = $Common/BGM

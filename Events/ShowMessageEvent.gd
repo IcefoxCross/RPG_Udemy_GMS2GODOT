@@ -1,5 +1,12 @@
 extends MapEvent
 
+"""
+Show Message Event
+	An Event Node to display a message window that shows a String text intended for short messages. For several lines of text,
+a Show Dialog Event is recommended.
+	If the message won't be Centered, you can select the position of the message in the screen.
+"""
+
 class_name ShowMessageEvent
 
 export (String, MULTILINE) var text

@@ -1,5 +1,23 @@
 extends Node2D
 
+"""
+Battle Unit Node
+	The basic Unit Node used to represent fighting characters in battle, both player and enemies
+	All types of Unit hold its own graphics (Sprite) and Health/Action Bar (UI)
+	To handle the battle processing, each Unit has its set of States:
+		Idle: The Unit waits until the Action Gauge is full, then moves to Action State.
+		Action: The Unit selects an action to perform (selected by the player if it's a PlayerUnit, or by an AI if it's an EnemyUnit)
+		Approach: If the Unit attacks, first it must approach the target to perform the move.
+		Attack: Animated the attack, and performs the damage calculation to the target.
+		Return: Once the Attack finishes, the Unit returns to its origin position.
+		Ranged Attack: In case the attack is ranged, it performs the Attack state's actions here, skipping the Approach and Return states
+		Fire Spell/Sonar: A state previous to Ranged, it sets up which spell will the Unit use.
+		Use Item: Applies the effect of the Item selected
+		Wait: After performing any Action, the Unit waits until other Units also perform their actions, once everyone is done, they return to the Idle State.
+		Hit: When recieving damage, the hit animation will play, returning to the Idle State when done. If HP is 0 at the apex of the animation, changes to the Death State.
+		Death: The Unit can no longer perform any action, giving the opposite Unit the victory.
+"""
+
 class_name Unit
 
 const SHIELD = preload("res://UI/Effects/Shield.tscn")

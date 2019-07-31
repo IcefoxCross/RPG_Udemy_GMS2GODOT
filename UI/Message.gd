@@ -1,5 +1,11 @@
 extends PanelContainer
 
+"""
+Message
+	Displays a short message, usually a single sentence, choosiing to position it in the center of the screen, or at a custom position.
+	The message is finished either by pressing a button, or when a set time is over.
+"""
+
 onready var npr = $NinePatchRect
 onready var textbox = $MarginContainer/Text
 

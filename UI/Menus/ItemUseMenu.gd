@@ -1,5 +1,10 @@
 extends "res://UI/Menus/NestMenu.gd"
 
+"""
+Item Use Menu
+	Displays what can the Player do with the selected Item, be it being used, displaying a Message with information about what it does, or dropping one of the current item from the inventory.
+"""
+
 onready var npr = $NinePatchRect
 onready var caret = $NinePatchRect/Caret
 onready var options_list = $NinePatchRect/CenterContainer/VBoxContainer

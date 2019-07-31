@@ -1,5 +1,12 @@
 extends MapEvent
 
+"""
+Show Dialog Event
+	An Event Node to display a dialog window that shows String texts from a list, with a name tag of a character displayed on the top.
+	You can select the character from its name as a String, or a path if it exists in the Scene Tree.
+	(Optional) You can set if the camera centers on the speaking character.
+"""
+
 class_name ShowDialogEvent
 
 export (String) var character_name

@@ -1,5 +1,10 @@
 extends "res://UI/Menus/NestMenu.gd"
 
+"""
+Item List Menu
+	Displays what items the Player can use during battle, as you select one of the items pulled from the Player's inventory.
+"""
+
 const ITEM_OPTIONS = preload("res://UI/Menus/ItemUseMenu.tscn")
 
 onready var list = $NinePatchRect/MarginContainer/ItemList

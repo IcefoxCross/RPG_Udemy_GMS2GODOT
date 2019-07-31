@@ -1,5 +1,10 @@
 extends "res://MainScenes/Battle/Effects/Projectile.gd"
 
+"""
+Fire Spell
+	A basic spell that hurls a fire ball to the enemy, making it flash red for a brief time, with a chance to inflict critical damage.
+"""
+
 onready var anim = $AnimationPlayer
 
 var attack = false

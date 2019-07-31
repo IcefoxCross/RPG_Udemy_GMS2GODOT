@@ -1,5 +1,11 @@
 extends Node
 
+"""
+Map Event Node
+	The root Event Node, all other action event inherit from this. Every child must represent a single action to perform,
+that must be executed when called by the function interact(). It must finish the execution by emitting the signal finished.
+"""
+
 class_name MapEvent
 
 signal finished()

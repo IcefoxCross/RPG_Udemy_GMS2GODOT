@@ -1,5 +1,11 @@
 extends Node2D
 
+"""
+Shield
+	Effect Node to represent when the Unit if defending against attacks.
+	Only for visual representation, it does not affect the gameplay functionally.
+"""
+
 onready var sprite = $Sprite
 
 var start_y = position.y

@@ -27,4 +27,3 @@ resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/flash = false
 shader_param/flash_color = Color( 0, 0, 0, 0 )
-

@@ -1,5 +1,11 @@
 extends Node2D
 
+"""
+Room
+	Node that represents a single map from the game, displays the Tileset with graphics,
+	holds the Doors to other maps, and can have Events that activate when entering the room.
+"""
+
 export (String) var room_tilemap = "TileMap"
 export(String, FILE, "*.ogg") var bgm = "none"
 

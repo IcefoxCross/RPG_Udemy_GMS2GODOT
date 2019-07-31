@@ -1,5 +1,14 @@
 extends MapEvent
 
+"""
+Move Event
+	An Event Node to move a Character, either playable or non-playable, to a set position, either relavite to its current position,
+or a set position on the map.
+	You can select the character from its name as a String, or a path if it exists in the Scene Tree.
+	You can select if the camera will follow the character when it moves.
+	(Optional) you can set a Wait Time after changing the direction.
+"""
+
 class_name MoveEvent
 
 export (String) var character_name

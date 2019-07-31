@@ -6,4 +6,3 @@
 volume_db = -10.0
 bus = "SFX"
 script = ExtResource( 1 )
-

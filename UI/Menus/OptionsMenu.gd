@@ -1,5 +1,11 @@
 extends "res://UI/Menus/NestMenu.gd"
 
+"""
+Options Menu
+	Node that displays a number of options during gameplay when the Player isn't in battle, from displaying status, to items, including Save and Load of the game.
+	This Menu is considered the root of all the sub-options, thus when this NestMenu is erased, so will all other NestMenu that are opened.
+"""
+
 const ITEMS_MENU = preload("res://UI/Menus/ItemListMenu.tscn")
 
 onready var npr = $NinePatchRect

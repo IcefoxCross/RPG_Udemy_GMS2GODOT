@@ -1,5 +1,10 @@
 extends "res://UI/Menus/NestMenu.gd"
 
+"""
+Action Use Menu
+	Displays what can the Player do with the selected Action, be it being used, or displaying a Message with information about what it does.
+"""
+
 onready var npr = $NinePatchRect
 onready var caret = $NinePatchRect/Caret
 onready var options_list = $NinePatchRect/CenterContainer/VBoxContainer

@@ -1,5 +1,11 @@
 extends Node2D
 
+"""
+Level Up
+	Animation Node to indicate when the Player has gained a new level.
+	Includes a Sprite animation and spawns Shine nodes in random positions.
+"""
+
 const SHINE = preload("res://UI/Effects/Shine.tscn")
 const ARROW = preload("res://UI/LevelUp/LevelUpArrow.tscn")
 const SFX = "res://Audio/SFX/levelup.wav"

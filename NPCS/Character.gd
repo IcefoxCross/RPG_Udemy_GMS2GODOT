@@ -1,5 +1,10 @@
 extends "res://UI/Speaker.gd"
 
+"""
+Character
+	Basic entity that can be interacted with, being able to move
+"""
+
 onready var sprite = $Sprite
 onready var anim = $AnimationPlayer
 

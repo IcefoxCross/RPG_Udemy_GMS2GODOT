@@ -1,5 +1,9 @@
 extends "res://MainScenes/Battle/Units/BattleUnit.gd"
 
+"""
+Enemy Unit Node
+	Inherits from Battle Unit, performs actions based on what is programmed on the Instanced Units from this Node.
+"""
 export (String) var unit_name
 
 func _ready():

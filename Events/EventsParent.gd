@@ -1,5 +1,14 @@
 extends Node
 
+"""
+Events Parent Node
+	The container Node of Single Events, it is necessary to execute a set of event in a top-down order.
+	It will iterate through its child nodes and execute every interact() function, wait until it recieves a -finished- signal, then
+execute the next one until there's none.
+	To avoid executing the event more times than intended, a unique save key is created and stored in the Game Data, if it exists,
+	the event is skipped.
+"""
+
 signal finished
 
 var player

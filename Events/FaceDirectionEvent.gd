@@ -1,5 +1,12 @@
 extends MapEvent
 
+"""
+Face Direction Event
+	An Event Node to change the facing direction of a Character, both playable and non-playable, selecting from 4 different directions.
+	You can select the character from its name as a String, or a path if it exists in the Scene Tree.
+	(Optional) you can set a Wait Time after changing the direction.
+"""
+
 class_name FaceDirectionEvent
 
 export (String) var character_name

@@ -1,5 +1,10 @@
 extends "res://NPCS/Character.gd"
 
+"""
+Elizabeth
+	Playable character, it can be moved with Inputs, and can interact with other Characters.
+"""
+
 const LASTE = preload("res://MainScenes/Battle/LastEncounter.tscn")
 
 signal encounter

@@ -1,5 +1,13 @@
 extends CanvasLayer
 
+"""
+Dialog
+	Node to start and display a Dialog on the screen, with as many pages of text as you want, as long as it fits the dialog window.
+	When it finishes going through all the lines, it emits the Finished signal.
+	You can change the speed at which the text scrolls on the window, and even set special characters to stop the scrolling mid sentence.
+	With the function init() you set up what lines of text to display and a portrait image, then it starts processing each text line.
+"""
+
 onready var box = $Control/DialogBox
 onready var text_visible = $Control/DialogBox/RichTextLabel
 onready var portrait_frame = $Control/PortraitFrame

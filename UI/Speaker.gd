@@ -1,5 +1,10 @@
 extends "res://Rooms/Objects/Interactible.gd"
 
+"""
+Speaker
+	This Interactible Node can 'talk' when it is interacted with, displaying a Dialog while suspending the game processing.
+"""
+
 var dialog
 var dialog_object
 var dialog_page

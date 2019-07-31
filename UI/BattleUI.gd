@@ -1,5 +1,11 @@
 extends Control
 
+"""
+Battle UI
+	This Node dictates which Action will the Player perform, being able to select attack, defense, use an item, or run from the current battle.
+	Only appears and can be selected when the Player Unit is in the Action State.
+"""
+
 const ITEMS_MENU = preload("res://UI/Menus/ItemListMenu.tscn")
 const ACTIONS_MENU = preload("res://UI/Menus/ActionListMenu.tscn")
 

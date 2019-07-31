@@ -1,5 +1,10 @@
 extends Node
 
+"""
+Cutscene Node
+Node intended to handle and execute a set of instructions on the game. Discontinued for the Event Nodes.
+"""
+
 onready var wait_timer = $WaitTimer
 
 var action

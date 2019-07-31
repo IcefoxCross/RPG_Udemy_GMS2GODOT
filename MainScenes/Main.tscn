@@ -47,4 +47,3 @@ bus = "BGM"
 
 [node name="SFX" parent="Common" instance=ExtResource( 5 )]
 volume_db = -20.0
-

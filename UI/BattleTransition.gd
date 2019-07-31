@@ -1,5 +1,10 @@
 extends CanvasLayer
 
+"""
+Battle Transition
+	Basic color change effect to signal the switch between the Room and Battle scenes.
+"""
+
 export (float) var duration = 1.0
 
 onready var rect = $Control/ColorRect

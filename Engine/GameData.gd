@@ -1,5 +1,22 @@
 extends Node
 
+"""
+Game Data Node
+An Autoload node that keeps and manages several kinds of data used through the entire game, including:
+		constants, current room, current enemy, varied functions, classes/enemies/items/skills/effects data
+		Save/Load system
+
+Script Variables
+---
+fade_duration: How long will the fade out effect last
+fade_type: Type of fade out from an Enum list given by the engine
+
+Functions
+---
+approach(start, end, shift): Approximates one value towards another by an ammount. Similar to an interpolation
+chance(perc): Returns a value if the percentile from the argument is higher than a randomized value
+"""
+
 ### CONSTS ###
 const BATTLE_SPACE = 160
 

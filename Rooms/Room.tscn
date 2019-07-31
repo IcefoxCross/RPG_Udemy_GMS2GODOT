@@ -44,4 +44,3 @@ format = 1
 
 [node name="RandomEncounters" parent="." instance=ExtResource( 3 )]
 on = false
-

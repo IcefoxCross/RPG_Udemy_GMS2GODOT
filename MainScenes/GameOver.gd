@@ -1,5 +1,10 @@
 extends Node
 
+"""
+Game Over
+	A simple screen with a message and background music
+"""
+
 func _ready():
 	$BGM.stream = load("res://Audio/BGM/a_graveyard_music.ogg")
 	$BGM.play()

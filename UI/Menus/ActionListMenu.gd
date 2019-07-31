@@ -1,5 +1,10 @@
 extends "res://UI/Menus/NestMenu.gd"
 
+"""
+Action List Menu
+	Displays what actions the Player can perform during battle, as you select one of the options pulled form the Player's action list.
+"""
+
 const ACTION_OPTIONS = preload("res://UI/Menus/ActionUseMenu.tscn")
 const CARET = preload("res://UI/Assets/s_ui_caret_0.png")
 
